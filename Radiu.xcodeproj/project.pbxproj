@@ -1,0 +1,608 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4942B65F222F559400994674 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B65E222F559400994674 /* AppDelegate.swift */; };
+		4942B661222F559400994674 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B660222F559400994674 /* ViewController.swift */; };
+		4942B664222F559400994674 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942B662222F559400994674 /* Main.storyboard */; };
+		4942B667222F559400994674 /* Radiu.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4942B665222F559400994674 /* Radiu.xcdatamodeld */; };
+		4942B669222F559600994674 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4942B668222F559600994674 /* Assets.xcassets */; };
+		4942B66C222F559600994674 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942B66A222F559600994674 /* LaunchScreen.storyboard */; };
+		4942B677222F559600994674 /* RadiuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B676222F559600994674 /* RadiuTests.swift */; };
+		4942B682222F559600994674 /* RadiuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B681222F559600994674 /* RadiuUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4942B673222F559600994674 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4942B653222F559400994674 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4942B65A222F559400994674;
+			remoteInfo = Radiu;
+		};
+		4942B67E222F559600994674 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4942B653222F559400994674 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4942B65A222F559400994674;
+			remoteInfo = Radiu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4942B65B222F559400994674 /* Radiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4942B65E222F559400994674 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4942B660222F559400994674 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4942B663222F559400994674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4942B666222F559400994674 /* Radiu.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Radiu.xcdatamodel; sourceTree = "<group>"; };
+		4942B668222F559600994674 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4942B66B222F559600994674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4942B66D222F559600994674 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4942B672222F559600994674 /* RadiuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadiuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4942B676222F559600994674 /* RadiuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiuTests.swift; sourceTree = "<group>"; };
+		4942B678222F559600994674 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4942B67D222F559600994674 /* RadiuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadiuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4942B681222F559600994674 /* RadiuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiuUITests.swift; sourceTree = "<group>"; };
+		4942B683222F559600994674 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4942B658222F559400994674 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4942B66F222F559600994674 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4942B67A222F559600994674 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4942B652222F559400994674 = {
+			isa = PBXGroup;
+			children = (
+				4942B65D222F559400994674 /* Radiu */,
+				4942B675222F559600994674 /* RadiuTests */,
+				4942B680222F559600994674 /* RadiuUITests */,
+				4942B65C222F559400994674 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4942B65C222F559400994674 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4942B65B222F559400994674 /* Radiu.app */,
+				4942B672222F559600994674 /* RadiuTests.xctest */,
+				4942B67D222F559600994674 /* RadiuUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4942B65D222F559400994674 /* Radiu */ = {
+			isa = PBXGroup;
+			children = (
+				4942B65E222F559400994674 /* AppDelegate.swift */,
+				4942B660222F559400994674 /* ViewController.swift */,
+				4942B662222F559400994674 /* Main.storyboard */,
+				4942B668222F559600994674 /* Assets.xcassets */,
+				4942B66A222F559600994674 /* LaunchScreen.storyboard */,
+				4942B66D222F559600994674 /* Info.plist */,
+				4942B665222F559400994674 /* Radiu.xcdatamodeld */,
+			);
+			path = Radiu;
+			sourceTree = "<group>";
+		};
+		4942B675222F559600994674 /* RadiuTests */ = {
+			isa = PBXGroup;
+			children = (
+				4942B676222F559600994674 /* RadiuTests.swift */,
+				4942B678222F559600994674 /* Info.plist */,
+			);
+			path = RadiuTests;
+			sourceTree = "<group>";
+		};
+		4942B680222F559600994674 /* RadiuUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4942B681222F559600994674 /* RadiuUITests.swift */,
+				4942B683222F559600994674 /* Info.plist */,
+			);
+			path = RadiuUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4942B65A222F559400994674 /* Radiu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4942B686222F559600994674 /* Build configuration list for PBXNativeTarget "Radiu" */;
+			buildPhases = (
+				4942B657222F559400994674 /* Sources */,
+				4942B658222F559400994674 /* Frameworks */,
+				4942B659222F559400994674 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Radiu;
+			productName = Radiu;
+			productReference = 4942B65B222F559400994674 /* Radiu.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4942B671222F559600994674 /* RadiuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4942B689222F559600994674 /* Build configuration list for PBXNativeTarget "RadiuTests" */;
+			buildPhases = (
+				4942B66E222F559600994674 /* Sources */,
+				4942B66F222F559600994674 /* Frameworks */,
+				4942B670222F559600994674 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4942B674222F559600994674 /* PBXTargetDependency */,
+			);
+			name = RadiuTests;
+			productName = RadiuTests;
+			productReference = 4942B672222F559600994674 /* RadiuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4942B67C222F559600994674 /* RadiuUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4942B68C222F559600994674 /* Build configuration list for PBXNativeTarget "RadiuUITests" */;
+			buildPhases = (
+				4942B679222F559600994674 /* Sources */,
+				4942B67A222F559600994674 /* Frameworks */,
+				4942B67B222F559600994674 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4942B67F222F559600994674 /* PBXTargetDependency */,
+			);
+			name = RadiuUITests;
+			productName = RadiuUITests;
+			productReference = 4942B67D222F559600994674 /* RadiuUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4942B653222F559400994674 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "University of Washington";
+				TargetAttributes = {
+					4942B65A222F559400994674 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					4942B671222F559600994674 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 4942B65A222F559400994674;
+					};
+					4942B67C222F559600994674 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 4942B65A222F559400994674;
+					};
+				};
+			};
+			buildConfigurationList = 4942B656222F559400994674 /* Build configuration list for PBXProject "Radiu" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4942B652222F559400994674;
+			productRefGroup = 4942B65C222F559400994674 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4942B65A222F559400994674 /* Radiu */,
+				4942B671222F559600994674 /* RadiuTests */,
+				4942B67C222F559600994674 /* RadiuUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4942B659222F559400994674 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4942B66C222F559600994674 /* LaunchScreen.storyboard in Resources */,
+				4942B669222F559600994674 /* Assets.xcassets in Resources */,
+				4942B664222F559400994674 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4942B670222F559600994674 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4942B67B222F559600994674 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4942B657222F559400994674 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4942B661222F559400994674 /* ViewController.swift in Sources */,
+				4942B667222F559400994674 /* Radiu.xcdatamodeld in Sources */,
+				4942B65F222F559400994674 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4942B66E222F559600994674 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4942B677222F559600994674 /* RadiuTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4942B679222F559600994674 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4942B682222F559600994674 /* RadiuUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4942B674222F559600994674 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4942B65A222F559400994674 /* Radiu */;
+			targetProxy = 4942B673222F559600994674 /* PBXContainerItemProxy */;
+		};
+		4942B67F222F559600994674 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4942B65A222F559400994674 /* Radiu */;
+			targetProxy = 4942B67E222F559600994674 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4942B662222F559400994674 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4942B663222F559400994674 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4942B66A222F559600994674 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4942B66B222F559600994674 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4942B684222F559600994674 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4942B685222F559600994674 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4942B687222F559600994674 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z3CY48AZQ4;
+				INFOPLIST_FILE = Radiu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.Radiu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4942B688222F559600994674 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z3CY48AZQ4;
+				INFOPLIST_FILE = Radiu/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.Radiu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4942B68A222F559600994674 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z3CY48AZQ4;
+				INFOPLIST_FILE = RadiuTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.RadiuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Radiu.app/Radiu";
+			};
+			name = Debug;
+		};
+		4942B68B222F559600994674 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z3CY48AZQ4;
+				INFOPLIST_FILE = RadiuTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.RadiuTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Radiu.app/Radiu";
+			};
+			name = Release;
+		};
+		4942B68D222F559600994674 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z3CY48AZQ4;
+				INFOPLIST_FILE = RadiuUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.RadiuUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Radiu;
+			};
+			name = Debug;
+		};
+		4942B68E222F559600994674 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z3CY48AZQ4;
+				INFOPLIST_FILE = RadiuUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.RadiuUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Radiu;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4942B656222F559400994674 /* Build configuration list for PBXProject "Radiu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4942B684222F559600994674 /* Debug */,
+				4942B685222F559600994674 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4942B686222F559600994674 /* Build configuration list for PBXNativeTarget "Radiu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4942B687222F559600994674 /* Debug */,
+				4942B688222F559600994674 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4942B689222F559600994674 /* Build configuration list for PBXNativeTarget "RadiuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4942B68A222F559600994674 /* Debug */,
+				4942B68B222F559600994674 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4942B68C222F559600994674 /* Build configuration list for PBXNativeTarget "RadiuUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4942B68D222F559600994674 /* Debug */,
+				4942B68E222F559600994674 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4942B665222F559400994674 /* Radiu.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4942B666222F559400994674 /* Radiu.xcdatamodel */,
+			);
+			currentVersion = 4942B666222F559400994674 /* Radiu.xcdatamodel */;
+			path = Radiu.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4942B653222F559400994674 /* Project object */;
+}
