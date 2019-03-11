@@ -67,23 +67,45 @@
                             <tabBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnj-nj-Lo1">
                                 <rect key="frame" x="0.0" y="76" width="375" height="49"/>
                                 <items>
-                                    <tabBarItem title="Hot" image="hot_ico1.png" id="UU4-bU-f5o" userLabel="Hot">
+                                    <tabBarItem title="Hot" image="hot_ico" id="UU4-bU-f5o" userLabel="Hot">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </tabBarItem>
-                                    <tabBarItem title="User" image="user_ico1.png" id="FI4-AF-RSh"/>
-                                    <tabBarItem title="Title" image="title_ico1.png" id="W5J-Ha-Q8X"/>
+                                    <tabBarItem title="User" image="user_ico" id="FI4-AF-RSh"/>
+                                    <tabBarItem title="Title" image="title_ico" id="W5J-Ha-Q8X"/>
                                 </items>
                                 <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tabBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MlA-Sv-sLN">
+                                <rect key="frame" x="0.0" y="125" width="375" height="542"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="272-lV-8GK">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="272-lV-8GK" id="Gzt-5h-1Dc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XsY-im-ava">
+                                                    <rect key="frame" x="15" y="-1" width="39" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="9zK-U0-e07"/>
                             <constraint firstItem="X63-y3-rPk" firstAttribute="top" secondItem="ZgB-Hp-7uX" secondAttribute="top" id="EUP-oa-JEs"/>
                             <constraint firstItem="X63-y3-rPk" firstAttribute="leading" secondItem="SYf-xm-dxH" secondAttribute="trailing" id="Fdq-uv-TSn"/>
+                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="bottom" secondItem="ZgB-Hp-7uX" secondAttribute="bottom" id="Ivh-LI-gm3"/>
                             <constraint firstItem="X63-y3-rPk" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="KSV-IR-G7N"/>
                             <constraint firstItem="X63-y3-rPk" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="MTu-rS-P1v"/>
                             <constraint firstItem="X63-y3-rPk" firstAttribute="leading" secondItem="SYf-xm-dxH" secondAttribute="trailing" id="NNU-li-UMy"/>
@@ -92,6 +114,8 @@
                             <constraint firstItem="X63-y3-rPk" firstAttribute="leading" secondItem="SYf-xm-dxH" secondAttribute="trailing" id="TvJ-Bj-1jr"/>
                             <constraint firstItem="SYf-xm-dxH" firstAttribute="leading" secondItem="ZgB-Hp-7uX" secondAttribute="leading" id="UTR-pS-HXZ"/>
                             <constraint firstItem="vnj-nj-Lo1" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="Xng-Pw-NoT"/>
+                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="leading" secondItem="ZgB-Hp-7uX" secondAttribute="leading" id="Ypf-4D-F4j"/>
+                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="top" secondItem="vnj-nj-Lo1" secondAttribute="bottom" id="out-wJ-4OQ"/>
                             <constraint firstItem="vnj-nj-Lo1" firstAttribute="leading" secondItem="ZgB-Hp-7uX" secondAttribute="leading" id="rgp-ht-JbO"/>
                             <constraint firstItem="X63-y3-rPk" firstAttribute="top" secondItem="ZgB-Hp-7uX" secondAttribute="top" id="v13-nK-hqB"/>
                             <constraint firstItem="X63-y3-rPk" firstAttribute="top" secondItem="ZgB-Hp-7uX" secondAttribute="top" id="vzY-Fn-itu"/>
@@ -113,12 +137,12 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1343" y="27"/>
+            <point key="canvasLocation" x="1341.5999999999999" y="26.53673163418291"/>
         </scene>
     </scenes>
     <resources>
-        <image name="hot_ico1.png" width="25" height="25"/>
-        <image name="title_ico1.png" width="25" height="25"/>
-        <image name="user_ico1.png" width="25" height="25"/>
+        <image name="hot_ico" width="18.75" height="18.75"/>
+        <image name="title_ico" width="18.75" height="18.75"/>
+        <image name="user_ico" width="18.75" height="18.75"/>
     </resources>
 </document>
