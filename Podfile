@@ -1,8 +1,6 @@
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '12.1'
-use_frameworks!
-
 target 'Radiu' do
-	pod 'Alamofire', '~> 4.8' 
-	pod 'SwiftyJSON'
+  use_frameworks!
+  pod 'Alamofire', '~> 5.0.0-beta.2'
+  pod 'AlamofireImage', '~> 3.5'
+  pod 'SwiftyJSON', '~> 4.0'
 end
