@@ -103,7 +103,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XsY-im-ava">
-                                                    <rect key="frame" x="10" y="-1" width="44" height="44"/>
+                                                    <rect key="frame" x="15" y="3" width="36" height="36"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
