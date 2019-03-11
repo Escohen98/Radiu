@@ -81,7 +81,7 @@
                                 <rect key="frame" x="0.0" y="125" width="375" height="542"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="272-lV-8GK" customClass="searchCell" customModule="Radiu" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sCell" id="272-lV-8GK" customClass="searchCell" customModule="Radiu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="272-lV-8GK" id="Gzt-5h-1Dc">
@@ -111,6 +111,7 @@
                                                 <constraint firstItem="XsY-im-ava" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="top" constant="-1" id="tGw-aq-f16"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="sCell"/>
                                         <connections>
                                             <outlet property="name" destination="gWx-Fb-ceG" id="gT5-Eb-N3s"/>
                                             <outlet property="profileImage" destination="XsY-im-ava" id="XJQ-8m-Zh8"/>
@@ -145,6 +146,7 @@
                     <connections>
                         <outlet property="searchDisplayController" destination="RjD-E2-Ktf" id="xgn-bA-P0R"/>
                         <outlet property="searchbar" destination="SYf-xm-dxH" id="LaZ-bl-d6J"/>
+                        <outlet property="tableView" destination="MlA-Sv-sLN" id="BpP-KB-uLg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kl9-yT-p79" userLabel="First Responder" sceneMemberID="firstResponder"/>

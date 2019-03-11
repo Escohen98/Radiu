@@ -15,8 +15,9 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return 1;
     }
     
+    @IBOutlet weak var tableView: UITableView!
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "qcell", for: indexPath) as! searchCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "sCell", for: indexPath) as! searchCell
         cell.name.text = "Default"
         cell.title.text = "This is a broadcast."
         cell.imageView?.image = UIImage(named: "hot_ico.png")
@@ -27,6 +28,8 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self;
+        tableView.dataSource = self;
         searchbar.barTintColor = UIColor.black
         // Do any additional setup after loading the view.
     }
