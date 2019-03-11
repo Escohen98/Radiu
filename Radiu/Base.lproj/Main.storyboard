@@ -45,15 +45,15 @@
                             <tabBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnj-nj-Lo1">
                                 <rect key="frame" x="0.0" y="20" width="375" height="49"/>
                                 <items>
-                                    <tabBarItem title="Hot" image="hot_ico" id="UU4-bU-f5o" userLabel="Hot">
+                                    <tabBarItem title="Live" image="hot_ico" id="UU4-bU-f5o" userLabel="Hot">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </tabBarItem>
+                                    <tabBarItem title="Subscribed" image="title_ico" id="W5J-Ha-Q8X"/>
                                     <tabBarItem title="User" image="user_ico" id="FI4-AF-RSh"/>
-                                    <tabBarItem title="Title" image="title_ico" id="W5J-Ha-Q8X"/>
                                 </items>
                                 <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tabBar>
@@ -115,6 +115,7 @@
                     </view>
                     <connections>
                         <outlet property="searchDisplayController" destination="RjD-E2-Ktf" id="xgn-bA-P0R"/>
+                        <outlet property="tabBar" destination="vnj-nj-Lo1" id="O3D-10-3uw"/>
                         <outlet property="tableView" destination="MlA-Sv-sLN" id="BpP-KB-uLg"/>
                     </connections>
                 </viewController>

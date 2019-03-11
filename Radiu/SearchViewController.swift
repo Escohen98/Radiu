@@ -21,33 +21,44 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return data.count
     }
     
+    var offset = 0;
     @IBOutlet weak var tableView: UITableView!
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sCell", for: indexPath) as! searchCell
+        
         let data1 : searchProperties
         if isFiltering() {
             data1 = filteredData[indexPath.item]
         } else {
             data1 = data[indexPath.item]
         }
+        
+        if tabBar.selectedItem!.title!.lowercased() == "live" && data1.active {
+        }
+        //TODO - Filter out non-active streams when Live tabbar is selected
+        
         cell.displayName.text = data1.displayName
         cell.title.text = data1.desc
         cell.profileImage.image = UIImage(named: "hot_ico.png")
         return cell
     }
     
-    @IBOutlet weak var searchbar: UISearchBar!
+    @IBOutlet weak var tabBar: UITabBar!
     
     let searchController = UISearchController(searchResultsController: nil)
     //Downloads JSON file, initializes tableView, then tries to set searchBar color to black
     override func viewDidLoad() {
         super.viewDidLoad()
         download(CHANNEL_URL, self)
+        
+        tabBar.selectedItem = tabBar.items![0]
+        
         //Search taken from https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
         // Setup the Search Controller
         searchController.searchResultsUpdater = self as UISearchResultsUpdating
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search..."
+        searchController.searchBar.barTintColor = .black
         navigationItem.searchController = searchController
         self.tableView.tableHeaderView = searchController.searchBar
         definesPresentationContext = true
@@ -65,7 +76,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
      * let savedJSON = UserDefaults.standard.string(forKey: "searchStreams")
      */
     //var data: Array<searchProperties> = []
-    var data: Array<searchProperties> = []
+    var data: Array<searchProperties> = [] //Main array for JSON object
     func download(_ url: String, _ VC: UIViewController)  {
         Alamofire.request(url).responseJSON{response in
             if response.result.value != nil {
@@ -101,6 +112,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //Determines what to filter
     //Currently using: displayName as filter.
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+       
         filteredData = data.filter({( search : searchProperties) -> Bool in
             return search.displayName.lowercased().contains(searchText.lowercased())
         })
