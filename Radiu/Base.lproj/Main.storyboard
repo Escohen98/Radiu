@@ -77,7 +77,7 @@
                                 </items>
                                 <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tabBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MlA-Sv-sLN" customClass="search">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MlA-Sv-sLN">
                                 <rect key="frame" x="0.0" y="125" width="375" height="542"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -113,7 +113,7 @@
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration" identifier="sCell"/>
                                         <connections>
-                                            <outlet property="name" destination="gWx-Fb-ceG" id="gT5-Eb-N3s"/>
+                                            <outlet property="displayName" destination="gWx-Fb-ceG" id="5J4-8j-UPs"/>
                                             <outlet property="profileImage" destination="XsY-im-ava" id="XJQ-8m-Zh8"/>
                                             <outlet property="title" destination="fWE-Bw-BT7" id="bmG-2L-LEZ"/>
                                         </connections>
