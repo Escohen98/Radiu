@@ -42,28 +42,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search..." translatesAutoresizingMaskIntoConstraints="NO" id="SYf-xm-dxH" colorLabel="IBBuiltInLabel-Red">
-                                <rect key="frame" x="0.0" y="20" width="319" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="319" id="0se-3g-FWO"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="K53-Wu-5c7" id="0Da-vG-vPG"/>
-                                </connections>
-                            </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X63-y3-rPk">
-                                <rect key="frame" x="319" y="20" width="56" height="56"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="3lk-Uo-PCa"/>
-                                </constraints>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <tabBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnj-nj-Lo1">
-                                <rect key="frame" x="0.0" y="76" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="49"/>
                                 <items>
                                     <tabBarItem title="Hot" image="hot_ico" id="UU4-bU-f5o" userLabel="Hot">
                                         <userDefinedRuntimeAttributes>
@@ -78,7 +58,7 @@
                                 <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tabBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MlA-Sv-sLN">
-                                <rect key="frame" x="0.0" y="125" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="69" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sCell" id="272-lV-8GK" customClass="searchCell" customModule="Radiu" customModuleProvider="target">
@@ -123,29 +103,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="9zK-U0-e07"/>
-                            <constraint firstItem="X63-y3-rPk" firstAttribute="top" secondItem="ZgB-Hp-7uX" secondAttribute="top" id="EUP-oa-JEs"/>
-                            <constraint firstItem="X63-y3-rPk" firstAttribute="leading" secondItem="SYf-xm-dxH" secondAttribute="trailing" id="Fdq-uv-TSn"/>
-                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="bottom" secondItem="ZgB-Hp-7uX" secondAttribute="bottom" id="Ivh-LI-gm3"/>
-                            <constraint firstItem="X63-y3-rPk" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="KSV-IR-G7N"/>
-                            <constraint firstItem="X63-y3-rPk" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="MTu-rS-P1v"/>
-                            <constraint firstItem="X63-y3-rPk" firstAttribute="leading" secondItem="SYf-xm-dxH" secondAttribute="trailing" id="NNU-li-UMy"/>
-                            <constraint firstItem="SYf-xm-dxH" firstAttribute="top" secondItem="ZgB-Hp-7uX" secondAttribute="top" id="Nyk-pg-jqb"/>
-                            <constraint firstItem="vnj-nj-Lo1" firstAttribute="top" secondItem="SYf-xm-dxH" secondAttribute="bottom" id="R51-kN-Kg8"/>
-                            <constraint firstItem="X63-y3-rPk" firstAttribute="leading" secondItem="SYf-xm-dxH" secondAttribute="trailing" id="TvJ-Bj-1jr"/>
-                            <constraint firstItem="SYf-xm-dxH" firstAttribute="leading" secondItem="ZgB-Hp-7uX" secondAttribute="leading" id="UTR-pS-HXZ"/>
-                            <constraint firstItem="vnj-nj-Lo1" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="Xng-Pw-NoT"/>
-                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="leading" secondItem="ZgB-Hp-7uX" secondAttribute="leading" id="Ypf-4D-F4j"/>
-                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="top" secondItem="vnj-nj-Lo1" secondAttribute="bottom" id="out-wJ-4OQ"/>
-                            <constraint firstItem="vnj-nj-Lo1" firstAttribute="leading" secondItem="ZgB-Hp-7uX" secondAttribute="leading" id="rgp-ht-JbO"/>
-                            <constraint firstItem="X63-y3-rPk" firstAttribute="top" secondItem="ZgB-Hp-7uX" secondAttribute="top" id="v13-nK-hqB"/>
-                            <constraint firstItem="X63-y3-rPk" firstAttribute="top" secondItem="ZgB-Hp-7uX" secondAttribute="top" id="vzY-Fn-itu"/>
+                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="15U-HP-TZB"/>
+                            <constraint firstItem="vnj-nj-Lo1" firstAttribute="leading" secondItem="ZgB-Hp-7uX" secondAttribute="leading" id="BEk-PY-FYT"/>
+                            <constraint firstItem="vnj-nj-Lo1" firstAttribute="top" secondItem="ZgB-Hp-7uX" secondAttribute="top" id="Dcl-Hk-1KE"/>
+                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="top" secondItem="vnj-nj-Lo1" secondAttribute="bottom" id="MT4-t2-Bix"/>
+                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="bottom" secondItem="ZgB-Hp-7uX" secondAttribute="bottom" id="Z2t-S3-hX6"/>
+                            <constraint firstItem="vnj-nj-Lo1" firstAttribute="trailing" secondItem="ZgB-Hp-7uX" secondAttribute="trailing" id="j1J-aH-9eC"/>
+                            <constraint firstItem="MlA-Sv-sLN" firstAttribute="leading" secondItem="ZgB-Hp-7uX" secondAttribute="leading" id="vuc-ft-WRb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZgB-Hp-7uX"/>
                     </view>
                     <connections>
                         <outlet property="searchDisplayController" destination="RjD-E2-Ktf" id="xgn-bA-P0R"/>
-                        <outlet property="searchbar" destination="SYf-xm-dxH" id="LaZ-bl-d6J"/>
                         <outlet property="tableView" destination="MlA-Sv-sLN" id="BpP-KB-uLg"/>
                     </connections>
                 </viewController>
@@ -153,7 +122,6 @@
                 <searchDisplayController id="RjD-E2-Ktf">
                     <connections>
                         <outlet property="delegate" destination="K53-Wu-5c7" id="R3H-Fd-QBr"/>
-                        <outlet property="searchBar" destination="SYf-xm-dxH" id="sCb-Mj-5iO"/>
                         <outlet property="searchContentsController" destination="K53-Wu-5c7" id="RRb-YQ-Wui"/>
                         <outlet property="searchResultsDataSource" destination="K53-Wu-5c7" id="FmQ-ve-xtm"/>
                         <outlet property="searchResultsDelegate" destination="K53-Wu-5c7" id="iEc-41-J2P"/>

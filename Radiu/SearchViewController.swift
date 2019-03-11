@@ -11,6 +11,8 @@ import Alamofire
 import SwiftyJSON
 
 class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/audio/channels/all"
+    let USER_URL = "https://api.jsonbin.io/b/5c86bfb88545b0611997cabd?fbclid=IwAR2NQM0G1nDZ2P-nd4OQOi-M-UC20mN2OQ69EJJqrnBvwrrAgESaBBmZRoE"
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(data.arrayValue.count)
         if isFiltering() {
@@ -36,23 +38,23 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var searchbar: UISearchBar!
     
-      let searchController = UISearchController(searchResultsController: nil)
+    let searchController = UISearchController(searchResultsController: nil)
     //Downloads JSON file, initializes tableView, then tries to set searchBar color to black
     override func viewDidLoad() {
         super.viewDidLoad()
-        download(url, self)
+        download(CHANNEL_URL, self)
         //Search taken from https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
         // Setup the Search Controller
-        searchController.searchResultsUpdater = self as! UISearchResultsUpdating
+        searchController.searchResultsUpdater = self as UISearchResultsUpdating
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search..."
         navigationItem.searchController = searchController
+        self.tableView.tableHeaderView = searchController.searchBar
         definesPresentationContext = true
         tableView.delegate = self
         tableView.dataSource = self
-        searchbar.barTintColor = UIColor.black
+        //searchbar.barTintColor = UIColor.black
        
-        // Do any additional setup after loading the view.
     }
     
     /*
@@ -64,7 +66,6 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
      */
     //var data: Array<searchProperties> = []
     var data: Array<searchProperties> = []
-    let url = "https://audio-api.kjgoodwin.me/v1/audio/channels/all"
     func download(_ url: String, _ VC: UIViewController)  {
         Alamofire.request(url).responseJSON{response in
             if response.result.value != nil {
