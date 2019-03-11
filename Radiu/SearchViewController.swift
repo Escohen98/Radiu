@@ -13,13 +13,21 @@ import SwiftyJSON
 class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(data.arrayValue.count)
-        return data.count;
+        if isFiltering() {
+            return filteredData.count
+        }
+        return data.count
     }
     
     @IBOutlet weak var tableView: UITableView!
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sCell", for: indexPath) as! searchCell
-        let data1 = data[indexPath.item]
+        let data1 : searchProperties
+        if isFiltering() {
+            data1 = filteredData[indexPath.item]
+        } else {
+            data1 = data[indexPath.item]
+        }
         cell.displayName.text = data1.displayName
         cell.title.text = data1.desc
         cell.profileImage.image = UIImage(named: "hot_ico.png")
@@ -89,12 +97,20 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     var filteredData: Array<searchProperties> = []
+    //Determines what to filter
+    //Currently using: displayName as filter.
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredData = data.filter({( search : searchProperties) -> Bool in
             return search.displayName.lowercased().contains(searchText.lowercased())
         })
         
         tableView.reloadData()
+    }
+    
+    //Checks if user is searching for something specific
+    //Returns true if user has typed into search bar. False otherwise.
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
     }
 
     /*
