@@ -16,6 +16,7 @@
 		4942B677222F559600994674 /* RadiuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B676222F559600994674 /* RadiuTests.swift */; };
 		4942B682222F559600994674 /* RadiuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B681222F559600994674 /* RadiuUITests.swift */; };
 		4B5CD1B4A33F09BA49A68E34 /* Pods_Radiu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0D8C750A7F570D515FC9D6 /* Pods_Radiu.framework */; };
+		E3099134222F694800BCB6C6 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3099133222F694800BCB6C6 /* StreamViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		4942B683222F559600994674 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4207A3393AB35846C100AFC /* Pods-Radiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Radiu.debug.xcconfig"; path = "Target Support Files/Pods-Radiu/Pods-Radiu.debug.xcconfig"; sourceTree = "<group>"; };
 		AD6BF354FEDF4DB97884A59F /* Pods-Radiu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Radiu.release.xcconfig"; path = "Target Support Files/Pods-Radiu/Pods-Radiu.release.xcconfig"; sourceTree = "<group>"; };
+		E3099133222F694800BCB6C6 /* StreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +97,6 @@
 				A4207A3393AB35846C100AFC /* Pods-Radiu.debug.xcconfig */,
 				AD6BF354FEDF4DB97884A59F /* Pods-Radiu.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -127,6 +128,7 @@
 				4942B65E222F559400994674 /* AppDelegate.swift */,
 				4942B660222F559400994674 /* ViewController.swift */,
 				4942B662222F559400994674 /* Main.storyboard */,
+				E3099133222F694800BCB6C6 /* StreamViewController.swift */,
 				4942B668222F559600994674 /* Assets.xcassets */,
 				4942B66A222F559600994674 /* LaunchScreen.storyboard */,
 				4942B66D222F559600994674 /* Info.plist */,
@@ -335,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3099134222F694800BCB6C6 /* StreamViewController.swift in Sources */,
 				4942B661222F559400994674 /* ViewController.swift in Sources */,
 				4942B667222F559400994674 /* Radiu.xcdatamodeld in Sources */,
 				4942B65F222F559400994674 /* AppDelegate.swift in Sources */,
@@ -514,13 +517,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z3CY48AZQ4;
+				DEVELOPMENT_TEAM = GGZV2C7N67;
 				INFOPLIST_FILE = Radiu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.Radiu;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.kyle.Radiu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -533,13 +536,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z3CY48AZQ4;
+				DEVELOPMENT_TEAM = GGZV2C7N67;
 				INFOPLIST_FILE = Radiu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.Radiu;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.Washington.kyle.Radiu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
