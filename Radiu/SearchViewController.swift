@@ -20,7 +20,6 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.name.text = "Default"
         cell.title.text = "This is a broadcast."
         cell.imageView?.image = UIImage(named: "hot_ico.png")
-        print("hi")
         return cell
     }
     
