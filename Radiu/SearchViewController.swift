@@ -17,11 +17,12 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //print(data.arrayValue.count)
         if isFiltering() {
             return filteredData.count
+        } else if isActiveTab() {
+            return activeData.count
         }
         return data.count
     }
-    
-    var offset = 0;
+
     @IBOutlet weak var tableView: UITableView!
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sCell", for: indexPath) as! searchCell
@@ -29,13 +30,13 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let data1 : searchProperties
         if isFiltering() {
             data1 = filteredData[indexPath.item]
+        } else if isActiveTab() {
+            data1 = activeData[indexPath.item]
         } else {
             data1 = data[indexPath.item]
         }
-        
-        if tabBar.selectedItem!.title!.lowercased() == "live" && data1.active {
-        }
         //TODO - Filter out non-active streams when Live tabbar is selected
+        
         
         cell.displayName.text = data1.displayName
         cell.title.text = data1.desc
@@ -77,6 +78,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
      */
     //var data: Array<searchProperties> = []
     var data: Array<searchProperties> = [] //Main array for JSON object
+    var activeData: Array<searchProperties> = [] //For active streams
     func download(_ url: String, _ VC: UIViewController)  {
         Alamofire.request(url).responseJSON{response in
             if response.result.value != nil {
@@ -84,9 +86,12 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 for d in data.arrayValue {
                     let newStruct = searchProperties(id: d["id"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"].intValue, active: d["active"].boolValue, displayName: d["displayName"].stringValue)
                     self.data.append(newStruct)
+                    if newStruct.active {
+                       self.activeData.append(newStruct)
+                    }
                 }
                 self.tableView.reloadData()
-                
+                print("Active data: \(self.activeData)")
                 //We got the data, now we'll save the data in its state as a String
                 //UserDefaults.standard.set(data.rawString(), forKey: "searchStreams")
                 //now that we saved we can parse this inforamtion into another function
@@ -112,10 +117,15 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //Determines what to filter
     //Currently using: displayName as filter.
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-       
-        filteredData = data.filter({( search : searchProperties) -> Bool in
-            return search.displayName.lowercased().contains(searchText.lowercased())
-        })
+        if isActiveTab() {
+            filteredData = data.filter({( search : searchProperties) -> Bool in
+                return search.displayName.lowercased().contains(searchText.lowercased())
+            })
+        } else {
+            filteredData = activeData.filter({( search : searchProperties) -> Bool in
+                return search.displayName.lowercased().contains(searchText.lowercased())
+            })
+        }
         
         tableView.reloadData()
     }
@@ -136,6 +146,9 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     */
 
+    func isActiveTab() -> Bool {
+        return tabBar.selectedItem! == tabBar.items![0]
+    }
 }
 
 //Taken from https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
