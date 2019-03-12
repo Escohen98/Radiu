@@ -5,4 +5,5 @@ use_frameworks!
 target 'Radiu' do
 	pod 'Alamofire', '~> 4.8' 
 	pod 'SwiftyJSON'
+	pod 'Starscream', '~> 3.0.2'
 end
