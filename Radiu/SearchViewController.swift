@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
     let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/audio/channels/all"
     let USER_URL = "https://api.jsonbin.io/b/5c86bfb88545b0611997cabd?fbclid=IwAR2NQM0G1nDZ2P-nd4OQOi-M-UC20mN2OQ69EJJqrnBvwrrAgESaBBmZRoE"
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -21,6 +21,10 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return activeData.count
         }
         return data.count
+    }
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print(item)
     }
 
     @IBOutlet weak var tableView: UITableView!
@@ -65,6 +69,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource {
         definesPresentationContext = true
         tableView.delegate = self
         tableView.dataSource = self
+        tabBar.delegate = self
         //searchbar.barTintColor = UIColor.black
        
     }
