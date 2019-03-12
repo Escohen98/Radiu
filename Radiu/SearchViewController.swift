@@ -17,14 +17,21 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         //print(data.arrayValue.count)
         if isFiltering() {
             return filteredData.count
-        } else if isActiveTab() {
+        } else if selected == "live" {
             return activeData.count
+        } else if selected == "subscribed" {
+            //Implementation comes later
+        } else if selected == "user" {
+            //Implementation comes later
         }
         return data.count
     }
     
+    var selected = "live"
+    //Handles tab bar selection changes
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        print(item)
+        selected = item.title!.lowercased()
+        tableView.reloadData()
     }
 
     @IBOutlet weak var tableView: UITableView!
@@ -122,7 +129,19 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     //Determines what to filter
     //Currently using: displayName as filter.
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        if isActiveTab() {
+        if selected == "live" {
+            filteredData = data.filter({( search : searchProperties) -> Bool in
+                return search.displayName.lowercased().contains(searchText.lowercased())
+            })
+        } else if selected == "subscribed" {
+            //Implementation Comes later
+            //Temporary
+            filteredData = data.filter({( search : searchProperties) -> Bool in
+                return search.displayName.lowercased().contains(searchText.lowercased())
+            })
+        } else if selected == "users" {
+            //Implementation Comes later
+            //Temporary
             filteredData = data.filter({( search : searchProperties) -> Bool in
                 return search.displayName.lowercased().contains(searchText.lowercased())
             })
