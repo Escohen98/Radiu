@@ -13,7 +13,7 @@ import SwiftyJSON
 class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
     //let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/audio/channels/all"
     let CHANNEL_URL = "https://api.jsonbin.io/b/5c885df5bb08b22a75695907?fbclid=IwAR2oZzwfwP-k52AMSBKlrWEUBRy1Xdh83WlmXfoQL98umJ2-DDD1RhuAe_w";
-    let USER_URL = "https://api.jsonbin.io/b/5c86bfb88545b0611997cabd?fbclid=IwAR2NQM0G1nDZ2P-nd4OQOi-M-UC20mN2OQ69EJJqrnBvwrrAgESaBBmZRoE"
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(data.arrayValue.count)
         if isFiltering() { //When the user is typing in the search bar
@@ -23,7 +23,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         } else if selected == "subscribed" {
             //Implementation comes later
         } else if selected == "user" {
-            //Implementation comes later
+            return userData.count
         }
         return data.count
     }
@@ -40,21 +40,55 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sCell", for: indexPath) as! searchCell
         
-        let data1 : searchProperties
-        if isFiltering() {
-            data1 = filteredData[indexPath.item]
-        } else if isActiveTab() {
-            data1 = activeData[indexPath.item]
-        } else {
-            data1 = data[indexPath.item]
-        }
+        initCell(cell: cell, indexPath: indexPath)
         //TODO - Filter out non-active streams when Live tabbar is selected
         
         
-        cell.displayName.text = data1.displayName
-        cell.title.text = data1.desc
-        cell.profileImage.image = UIImage(named: "waveform-vector-6")
+        
         return cell
+    }
+    
+    //Specifies which tab is selected and assigns data/initializes cell accordingly.
+    func initCell(cell: searchCell, indexPath: IndexPath) {
+        let data1: Any
+        if selected == "live" {
+            if isFiltering() {
+                data1 = filteredData[indexPath.item]
+            } else {
+                data1 = activeData[indexPath.item]
+            }
+            
+            cell.displayName.text = (data1 as! searchProperties).displayName
+            cell.title.text = "Awesome Stream!"//(data1 as! searchProperties).desc
+            cell.profileImage.image = UIImage(named: "hot_ico")
+            
+        } else if selected == "user" {
+            if isFiltering() {
+                data1 = filteredData[indexPath.item]
+            } else {
+                data1 = userData[indexPath.item]
+            }
+            
+            cell.displayName.text = (data1 as! user).userName
+            cell.title.text = "Offline."
+            let newURL = URL(string: (data1 as! user).photoURL)
+            let other = URL(string: "https://cdn2.iconfinder.com/data/icons/music-colored-outlined-pixel-perfect/64/music-35-512.png")
+            let photoData = try? Data(contentsOf: newURL ?? other!)
+            if let imageData = photoData {
+                cell.profileImage.image = UIImage(data: imageData)
+            }
+        } else { //Same as live until subscribed is implemented.
+            if isFiltering() {
+                data1 = filteredData[indexPath.item]
+            } else {
+                data1 = data[indexPath.item]
+            }
+            
+            cell.displayName.text = (data1 as! searchProperties).displayName
+            cell.title.text = "Awesome Stream!"//(data1 as! searchProperties).desc
+            cell.profileImage.image = UIImage(named: "hot_ico")
+            
+        }
     }
     
     @IBOutlet weak var tabBar: UITabBar!
@@ -64,13 +98,17 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         download(CHANNEL_URL, self)
-        
+        users().download(self, tableView, completion: { (userData: Array<user>) in
+            self.userData = userData
+            print("userData: \(self.userData)")
+            self.tableView.reloadData()
+        }) //Safe-guard to prevent async problems.
         tabBar.selectedItem = tabBar.items![0]
         
         //Search taken from https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
         // Setup the Search Controller
         searchController.searchResultsUpdater = self as UISearchResultsUpdating
-        searchController.obscuresBackgroundDuringPresentation = false
+    searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search..."
         searchController.searchBar.barTintColor = .black
         navigationItem.searchController = searchController
@@ -93,8 +131,10 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     //var data: Array<searchProperties> = []
     var data: Array<searchProperties> = [] //Main array for JSON object
     var activeData: Array<searchProperties> = [] //For active streams
+    var userData: Array<user> = [] //For user list
+    
     func download(_ url: String, _ VC: UIViewController)  {
-        Alamofire.request(url).responseJSON{response in
+        Repository.sessionManager.request(url).responseJSON{response in
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
                 for d in data.arrayValue {
