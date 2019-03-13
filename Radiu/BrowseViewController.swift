@@ -6,22 +6,40 @@
 //  Copyright © 2019 University of Washington. All rights reserved.
 //
 
+let STREAM_LIST_URL : String = "https://audio-api.kjgoodwin.me/v1/audio/channels/all"
+let USER_LIST_URL : String = "https://api.jsonbin.io/b/5c86bfb88545b0611997cabd"
+
 import UIKit
 import Alamofire
 import AlamofireImage
+import SwiftyJSON
 
 class BrowseViewController: UITableViewController {
   
   @IBOutlet weak var stream_list: UITableView!
   
   // TODO: This is dummy data
-  let streams : [Stream] = [Stream("My Podcast", "user123", 1280), Stream("My Radio", "test123", 240), Stream("My Music", "somebody123", 2009)]
+  var streams : [Stream] = [Stream("My Podcast", "user123", 1280), Stream("My Radio", "test123", 240), Stream("My Music", "somebody123", 2009)]
+//  var streams : [Stream] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.stream_list.dataSource = self
+    self.stream_list.delegate = self
+
+    Alamofire.request(STREAM_LIST_URL).responseJSON {
+      response in
+      if let result = response.result.value {
+        let json = JSON(result)
+        for stream_data in json.arrayValue {
+          let stream = self.parseStreamList(stream_data)
+          print("testing")
+          self.streams.append(stream)
+        }
+        self.stream_list.reloadData()
+      }
+    }
     
-    stream_list.dataSource = self
-    stream_list.delegate = self
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     
@@ -29,15 +47,32 @@ class BrowseViewController: UITableViewController {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
   
-  // MARK: - Table view data source
-  
-  //    override func numberOfSections(in tableView: UITableView) -> Int {
-  //        // #warning Incomplete implementation, return the number of sections
-  //        return 0
-  //    }
+  func parseStreamList(_ stream : JSON) -> Stream {
+    let name = stream["displayName"].stringValue
+    let user = stream["creator"].stringValue
+    
+    let current_date = Date()
+    let isoDate = stream["goLiveTime"].stringValue
+    var current_duration = 0
+    
+    if stream["goLiveTime"].exists() {
+      let calendar = Calendar.current
+
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+      dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+      let start_date = dateFormatter.date(from:isoDate)!
+
+      current_duration = Int(calendar.component(.second, from: current_date)) - Int(calendar.component(.second, from: start_date))
+    }
+    
+    let new_stream : Stream = Stream(name, user, current_duration)
+    return new_stream
+  }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
+    print("size", streams.count)
     return streams.count
   }
   
@@ -62,8 +97,6 @@ class BrowseViewController: UITableViewController {
         duration = "\(String(hours)):\(duration)"
       }
     }
-    
-    print(duration);
     
     cell.current_duration.text = duration
     
@@ -137,13 +170,11 @@ class Stream {
   var current_duration : Int = 0
   
   // TODO: This is a placeholder image
-  var image_url : String = "https://unixtitan.net/images/waveform-vector-6.png"
+  var image_url : String = ""
   
   init(_ title : String, _ user : String, _ current_duration: Int) {
     self.title = title
     self.user = user
     self.current_duration = current_duration
-
-    // self.image_url = image_url
   }
 }
