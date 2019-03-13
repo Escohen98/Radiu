@@ -18,17 +18,16 @@ class download: NSObject {
      * Should probably also move to another class/file
      * let savedJSON = UserDefaults.standard.string(forKey: "searchStreams")
      */
-    func download(_ url: String, _ VC: UIViewController, _ tableView: UITableView) -> Array<searchProperties> {
-        var returnData: Array<searchProperties> = []
+    func download(_ url: String, _ VC: UIViewController, _ tableView: UITableView) -> Array<user> {
+        var returnData: Array<user> = []
         Alamofire.request(url).responseJSON{response in
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
                 for d in data.arrayValue {
-                    let newStruct = searchProperties(id: d["id"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"].intValue, active: d["active"].boolValue, displayName: d["displayName"].stringValue)
+                    let newStruct = user(id: d["id"].intValue, photoURL: d["photoURL"].stringValue, firstName: d["firstName"].stringValue, lastName: d["lastName"].stringValue, userName: d["userName"].stringValue)
                     returnData.append(newStruct)
                 }
-                tableView.reloadData()
-                
+                    tableView.reloadData()
                 //We got the data, now we'll save the data in its state as a String
                 //UserDefaults.standard.set(data.rawString(), forKey: "searchStreams")
                 //now that we saved we can parse this inforamtion into another function
@@ -42,4 +41,12 @@ class download: NSObject {
         }
         return returnData
     }
+}
+
+struct user {
+    var id: Int = -1
+    var photoURL: String = ""
+    var firstName: String = ""
+    var lastName: String = ""
+    var userName: String = ""
 }

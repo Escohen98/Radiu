@@ -11,11 +11,12 @@ import Alamofire
 import SwiftyJSON
 
 class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
-    let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/audio/channels/all"
+    //let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/audio/channels/all"
+    let CHANNEL_URL = "https://api.jsonbin.io/b/5c885df5bb08b22a75695907?fbclid=IwAR2oZzwfwP-k52AMSBKlrWEUBRy1Xdh83WlmXfoQL98umJ2-DDD1RhuAe_w";
     let USER_URL = "https://api.jsonbin.io/b/5c86bfb88545b0611997cabd?fbclid=IwAR2NQM0G1nDZ2P-nd4OQOi-M-UC20mN2OQ69EJJqrnBvwrrAgESaBBmZRoE"
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(data.arrayValue.count)
-        if isFiltering() {
+        if isFiltering() { //When the user is typing in the search bar
             return filteredData.count
         } else if selected == "live" {
             return activeData.count
@@ -27,7 +28,8 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         return data.count
     }
     
-    var selected = "live"
+    var selected = "live" //Selected tab
+    
     //Handles tab bar selection changes
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         selected = item.title!.lowercased()
@@ -51,7 +53,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         
         cell.displayName.text = data1.displayName
         cell.title.text = data1.desc
-        cell.profileImage.image = UIImage(named: "hot_ico.png")
+        cell.profileImage.image = UIImage(named: "waveform-vector-6")
         return cell
     }
     
@@ -96,7 +98,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
                 for d in data.arrayValue {
-                    let newStruct = searchProperties(id: d["id"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"].intValue, active: d["active"].boolValue, displayName: d["displayName"].stringValue)
+                    let newStruct = searchProperties(id: d["id"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"].intValue, active: d["active"].boolValue, displayName: d["displayName"].stringValue, activeListeners: d["activeListeners"].arrayValue.map { $0.intValue}, followers: d["followers"].arrayValue.map { $0.intValue})
                     self.data.append(newStruct)
                     if newStruct.active {
                        self.activeData.append(newStruct)
@@ -191,6 +193,8 @@ struct searchProperties {
     var creator: Int = 0
     var active: Bool = false
     var displayName: String = ""
+    var activeListeners: [Int] = []
+    var followers: [Int] = []
 }
 
 class searchCell: UITableViewCell {
