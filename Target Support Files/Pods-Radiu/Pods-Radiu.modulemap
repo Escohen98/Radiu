@@ -1,0 +1,6 @@
+framework module Pods_Radiu {
+  umbrella header "Pods-Radiu-umbrella.h"
+
+  export *
+  module * { export * }
+}
