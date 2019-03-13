@@ -6,7 +6,7 @@
 //  Copyright © 2019 University of Washington. All rights reserved.
 //
 
-let STREAM_LIST_URL : String = "https://audio-api.kjgoodwin.me/v1/audio/channels/all"
+let STREAM_LIST_URL : String = "https://api.jsonbin.io/b/5c885df5bb08b22a75695907"
 let USER_LIST_URL : String = "https://api.jsonbin.io/b/5c86bfb88545b0611997cabd"
 
 import UIKit
@@ -19,21 +19,28 @@ class BrowseViewController: UITableViewController {
   @IBOutlet weak var stream_list: UITableView!
   
   // TODO: This is dummy data
-  var streams : [Stream] = [Stream("My Podcast", "user123", 1280), Stream("My Radio", "test123", 240), Stream("My Music", "somebody123", 2009)]
-//  var streams : [Stream] = []
+  var streams : [Stream] = [Stream("My Podcast", "user123", 1280, ""), Stream("My Radio", "test123", 240, ""), Stream("My Music", "somebody123", 2009, "")]
+  //  var streams : [Stream] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.stream_list.dataSource = self
     self.stream_list.delegate = self
-
+    
+    let configuration = URLSessionConfiguration.default
+    var afManager : SessionManager = Alamofire.SessionManager(configuration: configuration)
+    
     Alamofire.request(STREAM_LIST_URL).responseJSON {
       response in
       if let result = response.result.value {
         let json = JSON(result)
         for stream_data in json.arrayValue {
           let stream = self.parseStreamList(stream_data)
-          print("testing")
+          print(stream.title)
+          print(stream.user)
+          print(stream.current_duration)
+          print(stream.image_url)
+          print("-------")
           self.streams.append(stream)
         }
         self.stream_list.reloadData()
@@ -47,36 +54,43 @@ class BrowseViewController: UITableViewController {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
   
+  @IBAction func reloadData(_ sender: Any) {
+    print("reloading data, size \(streams.count)")
+    self.stream_list.reloadData()
+  }
+  
   func parseStreamList(_ stream : JSON) -> Stream {
     let name = stream["displayName"].stringValue
     let user = stream["creator"].stringValue
     
     let current_date = Date()
+    let image_url = stream["image"].stringValue
+    
     let isoDate = stream["goLiveTime"].stringValue
     var current_duration = 0
     
     if stream["goLiveTime"].exists() {
       let calendar = Calendar.current
-
+      
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
       dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
       let start_date = dateFormatter.date(from:isoDate)!
-
+      
       current_duration = Int(calendar.component(.second, from: current_date)) - Int(calendar.component(.second, from: start_date))
     }
     
-    let new_stream : Stream = Stream(name, user, current_duration)
+    let new_stream : Stream = Stream(name, user, current_duration, image_url)
     return new_stream
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
-    print("size", streams.count)
     return streams.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    print("tableView called for index \(indexPath.item)")
+    
     let cell = stream_list.dequeueReusableCell(withIdentifier: "StreamItem", for: indexPath) as! StreamCell
     
     let current_stream : Stream = streams[indexPath.item]
@@ -99,7 +113,6 @@ class BrowseViewController: UITableViewController {
     }
     
     cell.current_duration.text = duration
-    
     Alamofire.request(current_stream.image_url).responseImage {
       response in
       if let result = response.result.value {
@@ -109,51 +122,6 @@ class BrowseViewController: UITableViewController {
     
     return cell
   }
-  
-  /*
-   // Override to support conditional editing of the table view.
-   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-   // Return false if you do not want the specified item to be editable.
-   return true
-   }
-   */
-  
-  /*
-   // Override to support editing the table view.
-   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-   if editingStyle == .delete {
-   // Delete the row from the data source
-   tableView.deleteRows(at: [indexPath], with: .fade)
-   } else if editingStyle == .insert {
-   // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-   }
-   }
-   */
-  
-  /*
-   // Override to support rearranging the table view.
-   override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-   
-   }
-   */
-  
-  /*
-   // Override to support conditional rearranging of the table view.
-   override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-   // Return false if you do not want the item to be re-orderable.
-   return true
-   }
-   */
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destination.
-   // Pass the selected object to the new view controller.
-   }
-   */
   
 }
 
@@ -169,12 +137,17 @@ class Stream {
   var user : String = ""
   var current_duration : Int = 0
   
-  // TODO: This is a placeholder image
   var image_url : String = ""
   
-  init(_ title : String, _ user : String, _ current_duration: Int) {
+  init(_ title : String, _ user : String, _ current_duration: Int, _ image_url: String) {
     self.title = title
     self.user = user
     self.current_duration = current_duration
+    
+    if(!image_url.elementsEqual("")) {
+      self.image_url = image_url
+    } else {
+      self.image_url = "https://unixtitan.net/images/waveform-vector-6.png"
+    }
   }
 }
