@@ -63,13 +63,23 @@ class BrowseViewController: UITableViewController {
     let name = stream["displayName"].stringValue
     let user = stream["creator"].stringValue
     
-    let current_date = Date()
     let image_url = stream["image"].stringValue
     
-    let isoDate = stream["goLiveTime"].stringValue
-    var current_duration = 0
-    
+    let new_stream : Stream = Stream(name, user, 0, image_url)
+    new_stream.current_duration = self.getDurationInSeconds(stream: stream)
+    let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { timer in
+      new_stream.current_duration += 1
+      self.stream_list.reloadData()
+    })
+    return new_stream
+  }
+  
+  func getDurationInSeconds(stream : JSON) -> Int {
     if stream["goLiveTime"].exists() {
+      let current_date = Date()
+      let isoDate = stream["goLiveTime"].stringValue
+      
+      
       let calendar = Calendar.current
       
       let dateFormatter = DateFormatter()
@@ -77,11 +87,12 @@ class BrowseViewController: UITableViewController {
       dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
       let start_date = dateFormatter.date(from:isoDate)!
       
-      current_duration = Int(calendar.component(.second, from: current_date)) - Int(calendar.component(.second, from: start_date))
+      let current_duration = Int(calendar.component(.second, from: current_date)) - Int(calendar.component(.second, from: start_date))
+      print(current_duration)
+      return current_duration
+    } else {
+      return 0
     }
-    
-    let new_stream : Stream = Stream(name, user, current_duration, image_url)
-    return new_stream
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
