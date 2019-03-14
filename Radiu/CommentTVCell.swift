@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class CommentTVCell: UITableViewCell{
     
@@ -20,7 +21,7 @@ class CommentTVCell: UITableViewCell{
     func setComment(comment: Comment){
         self.comment = comment
         commentText.text = comment.text;
-        commentUserPhoto = comment.userPhoto;
+        commentUserPhoto.kf.setImage(with: comment.userPhoto)
         commentUsername.text = comment.username
     }
 }

@@ -10,29 +10,41 @@ import UIKit
 import WebKit
 import SwiftyJSON
 import Starscream
-
-
-
+import Kingfisher
+import Alamofire
 
 class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
     
-    @IBAction func playButtonPress(_ sender: Any) {
-        let audioPlay = "document.getElementById('audio-preview'); audioPreview.play()"
-        webview.evaluateJavaScript(audioPlay);
+    var streamID : String = "fucknew"
+    
+    var isPlaying = false
+    
+    let imgPlay = #imageLiteral(resourceName: "play.png")
+    let imgPause = #imageLiteral(resourceName: "stop.png")
+    
+    @IBOutlet weak var playPauseBtn: UIButton!
+    
+    @IBAction func togglePlay(_ sender: UIButton!) {
+        if isPlaying{
+            isPlaying = false;
+            playPauseBtn.isSelected = true
+            let audioPlay = "document.getElementById('audio-preview'); audioPreview.play()"
+            webview.evaluateJavaScript(audioPlay);
+        } else {
+            isPlaying = true;
+            playPauseBtn.isSelected = false
+            let audioPause = "document.getElementById('audio-preview'); audioPreview.pause()"
+            webview.evaluateJavaScript(audioPause);
+        }
     }
     
-    @IBAction func pausePress(_ sender: Any) {
-        
-        let audioPause = "document.getElementById('audio-preview'); audioPreview.pause()"
-        webview.evaluateJavaScript(audioPause);
-    }
     
     @IBOutlet weak var webview: WKWebView!
     
     var socket: WebSocket!
     
     
-    var profileImg : UIImage?
+    var profileImg : URL?
     var profileImageView : UIImageView?
     
     var comments: [Comment]?
@@ -48,20 +60,30 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        profileImg = UIImage(named: "profile-user")
-        profileImageView = UIImageView(image: profileImg)
-        comments = [Comment(text: "test comment i'm trying to make this really long just to see what happens", image: profileImageView!, username:"username"), Comment(text: "test comment", image: profileImageView!, username:"username"), Comment(text: "test comment", image: profileImageView!, username:"username")]
+        playPauseBtn.isSelected = true
+        
+        profileImg = URL(string: "https://www.gravatar.com/avatar/8849642f880e4fa6dd04634efd44a87f")
+        //profileImageView = UIImageView(image: profileImg!)
+        comments = [Comment(text: "test comment i'm trying to make this really long just to see what happens", image: profileImg!, username:"username"), Comment(text: "test comment", image: profileImg!, username:"username"), Comment(text: "test comment", image: profileImg!, username:"username")]
+        
         
         //self.comments = CommentRepository.getComments()
         
         //Kyles shit
+        let text = "wss://audio-api.kjgoodwin.me/ws?auth="
+        let header = "Bearer " + Repository.currentAuthToken
+        
+        let apiRequest = "https://audio-api.kjgoodwin.me/v1/audio/directclient/" + streamID + "?auth=" + header;
+        
+        let encodedRequest = apiRequest.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        
+        
         webview.uiDelegate = self;
-        let myURL = URL(string: "https://audio-api.kjgoodwin.me/v1/audio/directclient/new")
+        let myURL = URL(string: encodedRequest)
         let myRequest = URLRequest(url:myURL!)
         webview.load(myRequest)
         
-        let text = "wss://info-api.kylegoodwin.net/ws?auth="
-        let header = "Bearer weXcEkKg4fZEVgtNhjQ7l1hwBKzQm9XMFJk7BZ7rhcsEpyHDRBIV-CiPQydsyVeVlxczgcNPRHj7T67s7uBqaw=="
+       
         
         let thing = text + header
         let ding = thing.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
@@ -81,6 +103,8 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 150
     }
     
     deinit {
@@ -90,11 +114,26 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
     
     @IBAction func postComment(_ sender: Any) {
         
-        let commentText = commentTextField.text
-        //post the comment
-        print(commentText)
+        if let commentText = commentTextField.text  {
         
-        commentTextField.text = ""
+            let endpoint = "https://audio-api.kjgoodwin.me/v1/comments/" + streamID
+            
+            let parameters: Parameters = ["body": commentText]
+            
+            //post message
+            Repository.sessionManager.request(endpoint,
+                                              method: .post,
+                                              parameters: parameters,
+                                              encoding: JSONEncoding.default).validate()
+                .responseJSON { response in
+                    guard response.result.isSuccess else {
+                        print(response.result)
+                        return
+                    }
+            }
+        
+            commentTextField.text = ""
+        }
     }
     
     
@@ -121,14 +160,21 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
         
         if let data = text.data(using: .utf8) {
             if let json = try? JSON(data: data) {
-                let messageCreator = json["message"]["creator"].stringValue
-                let message = json["message"]["body"].stringValue
-                comments!.append(Comment(text: message, image: profileImageView!, username:messageCreator))
-                tableView.beginUpdates()
-                tableView.insertRows(at: [
-                    NSIndexPath(row: comments!.count-1, section: 0) as IndexPath], with: .automatic)
-                tableView.endUpdates()
-                print(message)
+                let messageChannelID = json["message"]["channelID"].stringValue
+                if messageChannelID == streamID {
+                    let messageCreator = json["message"]["creator"]["userName"].stringValue
+                    let message = json["message"]["body"].stringValue
+                    let imgString = json["message"]["creator"]["photoURL"].stringValue
+                    let imageURL = URL(string: imgString)
+                   
+                    //append comment to list and render new row
+                    comments!.append(Comment(text: message, image: imageURL!, username:messageCreator))
+                    tableView.beginUpdates()
+                    tableView.insertRows(at: [
+                        NSIndexPath(row: comments!.count-1, section: 0) as IndexPath], with: .automatic)
+                    tableView.endUpdates()
+                    print(message)
+                }
             }
         }
     }

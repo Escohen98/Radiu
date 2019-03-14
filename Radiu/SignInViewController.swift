@@ -48,7 +48,7 @@ class SignInViewController: UIViewController {
             self.activityIndicator.removeFromSuperview()
             if token != nil {
                 Repository.beginSession(token: token!)
-                Repository.initializeRepo();
+                Repository.setToken(token: token!)
                 self.performSegue(withIdentifier: "loginSuccess", sender: self)
             } else {
                 self.signInErrorAlert()

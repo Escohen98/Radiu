@@ -11,7 +11,7 @@ import UIKit
 
 class Comment: NSObject {
     var text: String
-    var userPhoto: UIImageView
+    var userPhoto: URL
     var username: String
     
     /*
@@ -25,7 +25,7 @@ class Comment: NSObject {
         text = try values.decode(String.self, forKey: .text)
     }*/
     
-    init(text: String, image: UIImageView, username: String){
+    init(text: String, image: URL, username: String){
         self.text = text
         self.userPhoto = image
         self.username = username

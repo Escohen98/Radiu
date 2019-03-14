@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0AF31346D2B1CFD37ED96A89 /* Pods_Radiu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833EECB0A2CBAF9CA1DBDF89 /* Pods_Radiu.framework */; };
-		3CBB2DF12232162E0075ECC3 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		3CBB2DF2223216310075ECC3 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		3CBB2DF12232162E0075ECC3 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		3CBB2DF2223216310075ECC3 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		3CBB2DF42232167A0075ECC3 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB2DF32232167A0075ECC3 /* StreamViewController.swift */; };
 		3CBB2DF6223217C80075ECC3 /* CommentTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB2DF5223217C80075ECC3 /* CommentTVCell.swift */; };
 		3CBB2DF8223630F20075ECC3 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBB2DF7223630F20075ECC3 /* Repository.swift */; };
@@ -276,10 +276,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4942B66C222F559600994674 /* LaunchScreen.storyboard in Resources */,
-				3CBB2DF12232162E0075ECC3 /* (null) in Resources */,
+				3CBB2DF12232162E0075ECC3 /* BuildFile in Resources */,
 				4942B669222F559600994674 /* Assets.xcassets in Resources */,
 				4942B664222F559400994674 /* Main.storyboard in Resources */,
-				3CBB2DF2223216310075ECC3 /* (null) in Resources */,
+				3CBB2DF2223216310075ECC3 /* BuildFile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +310,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Radiu/Pods-Radiu-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -318,6 +319,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
