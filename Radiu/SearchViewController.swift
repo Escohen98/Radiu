@@ -47,7 +47,9 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     //Specifies which tab is selected and assigns data/initializes cell accordingly.
     func initCell(cell: searchCell, indexPath: IndexPath) {
         let data1: Any
+        print("One")
         if selected == "live" {
+            print("Two")
             if isFiltering() {
                 data1 = filteredData[indexPath.item]
             } else {
@@ -55,8 +57,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             }
             print("data1: \(data1 as! searchProperties)")
             cell.channelID = (data1 as! searchProperties).id
-            print("cell.channelID")
-            print(cell.channelID)
+            print("cell.channelID \(cell.channelID)")
             //Fill label data
             //let data2 = data1 as! searchProperties
             cell.displayName.text = ((data1 as! searchProperties)).displayName
@@ -109,18 +110,19 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             cell.profileImage.image = UIImage(named: getUser(creatorID: (data1 as! searchProperties).creator["id"].intValue).photoURL) ?? UIImage(named: "hot_ico")
             cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             cell.channelID = (data1 as! searchProperties).id
+            print("cell.channelID \(cell.channelID)")
             
         }
     }
     
     //Run when a cell is selected. Using for segue
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "sCell", for: indexPath) as! searchCell
-        if selected == "live" || selected == "subcribed" {
+        let cell = tableView.cellForRow(at: indexPath)
+        if selected == "live" || selected == "subscribed" {
             
             self.performSegue(withIdentifier: "streamSegue", sender: cell)
         } else {
-            
+            self.performSegue(withIdentifier: "profileSegue", sender: cell)
         }
     }
     
@@ -134,7 +136,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             /* Add Data to be segued to StreamVC here*/
             print("channelID")
             
-            print((sender as! searchCell))
+            print("sender: \((sender as! searchCell).channelID)")
             streamVC?.streamID = (sender as! searchCell).channelID
         } else if selected == "subscribed" {
             /* Add Data to be segued to StreamVC here*/
