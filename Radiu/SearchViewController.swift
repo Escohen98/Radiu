@@ -59,8 +59,8 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             print("cell.channelID \(cell.channelID)")
             //Fill label data
             //let data2 = data1 as! searchProperties
-            cell.displayName.text = ((data1 as! searchProperties)).displayName
-            cell.title.text = "Awesome Stream!"//((data1 as! searchProperties)).desc
+            cell.displayName.text = ((data1 as! searchProperties)).displayName //Main Label
+            cell.title.text = "Awesome Stream!"//((data1 as! searchProperties)).desc //Secondary Label
             cell.title.textColor = .black
             cell.profileImage.image = UIImage(named: (data1 as! searchProperties).creator["photoURL"].stringValue) ?? UIImage(named: "hot_ico") //Change later for creator object.
               cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
@@ -76,10 +76,10 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             //Fill cell labels
             //let data2 = data1 as! user
             //Creates a sigabrt error.
-            cell.displayName.text = (data1 as! user).userName
+            cell.displayName.text = (data1 as! user).userName //Main Label
             let stream = getUserChannel(creatorID: (data1 as! user).id)
             if(stream.active) {
-                cell.title.text = "Live"
+                cell.title.text = "Live" //Secondary Label
                 cell.title.textColor = UIColor(hue: 0.3917, saturation: 1, brightness: 0.69, alpha: 1.0)
             } else {
                 cell.title.textColor = UIColor(hue: 0, saturation: 1, brightness: 0.93, alpha: 1.0)
@@ -259,7 +259,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             filteredData = data.filter({( search : searchProperties) -> Bool in
                 return search.displayName.lowercased().contains(searchText.lowercased())
             })
-        } else if selected == "users" {
+        } else if selected == "user" {
             //Implementation Comes later
             //Temporary
             filteredUserData = userData.filter({( search : user) -> Bool in
