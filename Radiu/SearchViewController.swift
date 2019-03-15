@@ -189,7 +189,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         //    self.userData = userData
         //    print("userData: \(self.userData)")
         //    self.tableView.reloadData()
-        //}) //Safe-guard to prevent async problems.
+        //or}) //Safe-guard to prevent async problems.
         tabBar.selectedItem = tabBar.items![0]
         
         //Search taken from https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
