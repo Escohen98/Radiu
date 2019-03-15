@@ -62,7 +62,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             //let data2 = data1 as! searchProperties
             cell.displayName.text = ((data1 as! searchProperties)).displayName
             cell.title.text = "Awesome Stream!"//((data1 as! searchProperties)).desc
-            cell.profileImage.image = UIImage(named: getUser(creatorID: (data1 as! searchProperties).creator["id"].intValue).photoURL) ?? UIImage(named: "hot_ico") //Change later for creator object.
+            cell.profileImage.image = UIImage(named: (data1 as! searchProperties).creator["photoURL"].stringValue) ?? UIImage(named: "hot_ico") //Change later for creator object.
               cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             
         } else if selected == "user" {
@@ -107,7 +107,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             //let data2 = data1 as! searchProperties
             cell.displayName.text = ((data1 as! searchProperties)).displayName
             cell.title.text = (data1 as! searchProperties).desc
-            cell.profileImage.image = UIImage(named: getUser(creatorID: (data1 as! searchProperties).creator["id"].intValue).photoURL) ?? UIImage(named: "hot_ico")
+            cell.profileImage.image = UIImage(named: (data1 as! searchProperties).creator["photoURL"].stringValue) ?? UIImage(named: "hot_ico") //Change later for creator object.
             cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             cell.channelID = (data1 as! searchProperties).id
             print("cell.channelID \(cell.channelID)")
@@ -299,16 +299,6 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             }
         }
         return searchProperties()
-    }
-    
-    //Returns user information for given id. Since all active users are part of users, should return a filled user every time. If live user is somehow not in userData, returns empty user object.
-    func getUser(creatorID: Int) -> user {
-        for uD in userData {
-            if(creatorID == uD.id) {
-                return uD
-            }
-        }
-        return user()
     }
 }
 

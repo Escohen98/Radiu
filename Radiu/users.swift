@@ -62,7 +62,7 @@ struct user {
  var desc: String = ""
  var genre: String = ""
  var createdAt: String = ""
- var creator: Int = 0
+ var creator: JSON = []
  var active: Bool = false
  var displayName: String = ""
  var activeListeners: [Int] = []
