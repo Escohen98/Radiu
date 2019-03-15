@@ -18,16 +18,18 @@ class users: NSObject {
      * Should probably also move to another class/file
      * let savedJSON = UserDefaults.standard.string(forKey: "searchStreams")
      */
-     let USER_URL = "https://api.jsonbin.io/b/5c86bfb88545b0611997cabd"
+     //let USER_URL = "https://api.jsonbin.io/b/5c86bfb88545b0611997cabd"
+    let USER_URL = "https://audio-api.kjgoodwin.me/v1/users?all=true"
     func download(_ VC: UIViewController, _ tableView: UITableView, completion: @escaping (Array<user>) -> Void) {
         var returnData: Array<user> = []
-        Alamofire.request(USER_URL).responseJSON{response in
+        Repository.sessionManager.request(USER_URL).responseJSON{response in
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
+                for d in data.arrayValue {
                 print("Data: \(data)")
-                    let newStruct = user(id: data["id"].intValue, photoURL: data["photoURL"].stringValue, firstName: data["firstName"].stringValue, lastName: data["lastName"].stringValue, userName: data["userName"].stringValue)
+                    let newStruct = user(id: d["id"].intValue, photoURL: d["photoURL"].stringValue, firstName: d["firstName"].stringValue, lastName: d["lastName"].stringValue, userName: d["userName"].stringValue)
                     returnData.append(newStruct)
-                print(returnData)
+            }
                 completion(returnData)
                 //tableView.reloadData()
                 return

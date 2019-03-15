@@ -11,12 +11,15 @@ import Alamofire
 import SwiftyJSON
 
 class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
-    //let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/audio/channels/all"
-    let CHANNEL_URL = "https://api.jsonbin.io/b/5c885df5bb08b22a75695907?fbclid=IwAR2oZzwfwP-k52AMSBKlrWEUBRy1Xdh83WlmXfoQL98umJ2-DDD1RhuAe_w";
+    let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/channels"
+    //let CHANNEL_URL = "https://api.jsonbin.io/b/5c885df5bb08b22a75695907?fbclid=IwAR2oZzwfwP-k52AMSBKlrWEUBRy1Xdh83WlmXfoQL98umJ2-DDD1RhuAe_w";
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(data.arrayValue.count)
         if isFiltering() { //When the user is typing in the search bar
+            if(selected == "user") {
+                return filteredUserData.count
+            }
             return filteredData.count
         } else if selected == "live" {
             return activeData.count
@@ -52,31 +55,34 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             }
             
             //Fill label data
-            let data2 = data1 as! searchProperties
-            cell.displayName.text = (data2).displayName
-            cell.title.text = "Awesome Stream!"//(data2).desc
-            cell.profileImage.image = UIImage(named: getUser(creatorID: data2.creator).photoURL) ?? UIImage(named: "hot_ico")
-              cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data2).createdAt)
+            //let data2 = data1 as! searchProperties
+            cell.displayName.text = ((data1 as! searchProperties)).displayName
+            cell.title.text = "Awesome Stream!"//((data1 as! searchProperties)).desc
+            cell.profileImage.image = UIImage(named: getUser(creatorID: (data1 as! searchProperties).creator["id"].intValue).photoURL) ?? UIImage(named: "hot_ico") //Change later for creator object.
+              cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             
         } else if selected == "user" {
             //Determines whether user has typed into search bar
             if isFiltering() {
-                data1 = filteredData[indexPath.item]
+                data1 = filteredUserData[indexPath.item]
             } else {
                 data1 = userData[indexPath.item]
             }
             
             //Fill cell labels
-            let data2 = data1 as! user
-            cell.displayName.text = data2.userName
+            //let data2 = data1 as! user
+            //Creates a sigabrt error.
+            cell.displayName.text = (data1 as! user).userName
             let stream = getUserChannel(creatorID: (data1 as! user).id)
             if(stream.active) {
-                cell.title.text = stream.displayName
+                cell.title.text = "Live"
+                cell.title.textColor = UIColor(hue: 0.3917, saturation: 1, brightness: 0.69, alpha: 1.0)
             } else {
+                cell.title.textColor = UIColor(hue: 0, saturation: 1, brightness: 0.93, alpha: 1.0)
                 cell.title.text = "Offline."
             }
             //Fill Image
-            let newURL = URL(string: data2.photoURL)
+            let newURL = URL(string: (data1 as! user).photoURL)
             let other = URL(string: "https://cdn2.iconfinder.com/data/icons/music-colored-outlined-pixel-perfect/64/music-35-512.png")
             let photoData = try? Data(contentsOf: newURL ?? other!)
             if let imageData = photoData {
@@ -85,8 +91,8 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             
             //Fill stream duration if user is streaming
             cell.duration.text = ""
-            if isLive(id: data2.id) {
-                cell.duration.text = Duration().formatDuration(cell: cell, createdAt: getUserChannel(creatorID: data2.id).createdAt)
+            if isLive(id: (data1 as! user).id) {
+                cell.duration.text = Duration().formatDuration(cell: cell, createdAt: getUserChannel(creatorID: (data1 as! user).id).createdAt)
             }
         } else { //Same as live until subscribed is implemented.
             if isFiltering() {
@@ -94,11 +100,11 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             } else {
                 data1 = data[indexPath.item]
             }
-            let data2 = data1 as! searchProperties
-            cell.displayName.text = (data2).displayName
-            cell.title.text = "Awesome Stream!"//(data2).desc
-            cell.profileImage.image = UIImage(named: getUser(creatorID: data2.creator).photoURL) ?? UIImage(named: "hot_ico")
-            cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data2).createdAt)
+            //let data2 = data1 as! searchProperties
+            cell.displayName.text = ((data1 as! searchProperties)).displayName
+            cell.title.text = (data1 as! searchProperties).desc
+            cell.profileImage.image = UIImage(named: getUser(creatorID: (data1 as! searchProperties).creator["id"].intValue).photoURL) ?? UIImage(named: "hot_ico")
+            cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             
         }
     }
@@ -107,16 +113,20 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selected == "live" {
             //let streamVC = StreamViewController();
+            /* Add Data to be segued to StreamVC here*/
             //self.present(streamVC, animated: true, completion: nil)
         } else if selected == "subscribed" {
             //let streamVC = StreamViewController();
+            /* Add Data to be segued to StreamVC here*/
             //self.present(streamVC, animated: true, completion: nil)
         } else {
             //let profileVC = ProfileViewController();
+            /* Add Data to be segued to profileVC here*/
             //self.present(profileVC, animated: true, completion: nil)
         }
     }
     
+    //Probably don't need this
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -187,7 +197,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
                 for d in data.arrayValue {
-                    let newStruct = searchProperties(id: d["id"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"].intValue, active: d["active"].boolValue, displayName: d["displayName"].stringValue, activeListeners: d["activeListeners"].arrayValue.map { $0.intValue}, followers: d["followers"].arrayValue.map { $0.intValue})
+                    let newStruct = searchProperties(id: d["id"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"], active: d["active"].boolValue, displayName: d["displayName"].stringValue, activeListeners: d["activeListeners"].arrayValue.map { $0.intValue}, followers: d["followers"].arrayValue.map { $0.intValue})
                     self.data.append(newStruct)
                     if newStruct.active {
                        self.activeData.append(newStruct)
@@ -217,11 +227,13 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     }
     
     var filteredData: Array<searchProperties> = []
+    var filteredUserData: Array<user> = []
     //Determines what to filter
     //Currently using: displayName as filter.
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        
         if selected == "live" {
-            filteredData = data.filter({( search : searchProperties) -> Bool in
+            filteredData = activeData.filter({( search : searchProperties) -> Bool in
                 return search.displayName.lowercased().contains(searchText.lowercased())
             })
         } else if selected == "subscribed" {
@@ -233,8 +245,8 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         } else if selected == "users" {
             //Implementation Comes later
             //Temporary
-            filteredData = data.filter({( search : searchProperties) -> Bool in
-                return search.displayName.lowercased().contains(searchText.lowercased())
+            filteredUserData = userData.filter({( search : user) -> Bool in
+                return search.userName.lowercased().contains(searchText.lowercased())
             })
         } else {
             filteredData = activeData.filter({( search : searchProperties) -> Bool in
@@ -254,7 +266,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     //Checks if given user is currently streaming. Returns true if yes, false otherwise.
     func isLive(id: Int) -> Bool {
         for active in activeData {
-            if active.creator == id {
+            if active.creator["id"].intValue == id {
                 return true
             }
         }
@@ -265,7 +277,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     func getUserChannel(creatorID: Int) -> searchProperties {
         if(isLive(id: creatorID)) {
             for active in activeData {
-                if active.creator == creatorID {
+                if active.creator["id"].intValue == creatorID {
                     return active
                 }
             }
@@ -297,7 +309,7 @@ struct searchProperties {
     var desc: String = ""
     var genre: String = ""
     var createdAt: String = ""
-    var creator: Int = 0
+    var creator: JSON = []
     var active: Bool = false
     var displayName: String = ""
     var activeListeners: [Int] = []
