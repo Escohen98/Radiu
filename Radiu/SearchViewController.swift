@@ -47,9 +47,8 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     //Specifies which tab is selected and assigns data/initializes cell accordingly.
     func initCell(cell: searchCell, indexPath: IndexPath) {
         let data1: Any
-        print("One")
+
         if selected == "live" {
-            print("Two")
             if isFiltering() {
                 data1 = filteredData[indexPath.item]
             } else {
@@ -62,7 +61,9 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             //let data2 = data1 as! searchProperties
             cell.displayName.text = ((data1 as! searchProperties)).displayName
             cell.title.text = "Awesome Stream!"//((data1 as! searchProperties)).desc
+            cell.title.textColor = .black
             cell.profileImage.image = UIImage(named: (data1 as! searchProperties).creator["photoURL"].stringValue) ?? UIImage(named: "hot_ico") //Change later for creator object.
+            print("Image: \((data1 as! searchProperties).creator["photoURL"].stringValue)")
               cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             
         } else if selected == "user" {
@@ -108,6 +109,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             cell.displayName.text = ((data1 as! searchProperties)).displayName
             cell.title.text = (data1 as! searchProperties).desc
             cell.profileImage.image = UIImage(named: (data1 as! searchProperties).creator["photoURL"].stringValue) ?? UIImage(named: "hot_ico") //Change later for creator object.
+            print("Image: \((data1 as! searchProperties).creator["photoURL"].stringValue)")
             cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             cell.channelID = (data1 as! searchProperties).id
             print("cell.channelID \(cell.channelID)")
