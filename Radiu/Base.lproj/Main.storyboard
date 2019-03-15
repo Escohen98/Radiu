@@ -70,7 +70,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWx-Fb-ceG">
-                                                    <rect key="frame" x="105" y="19.5" width="111" height="21"/>
+                                                    <rect key="frame" x="105" y="19" width="111" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="PKO-lV-Apq"/>
                                                     </constraints>
@@ -79,38 +79,38 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XsY-im-ava">
-                                                    <rect key="frame" x="15" y="10.5" width="60" height="60"/>
+                                                    <rect key="frame" x="15" y="10" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="DBq-LY-3Qz"/>
                                                         <constraint firstAttribute="width" constant="60" id="FBf-nC-DG7"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stream Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWE-Bw-BT7">
-                                                    <rect key="frame" x="105" y="48.5" width="93" height="21"/>
+                                                    <rect key="frame" x="105" y="48" width="93" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dur" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZt-3b-THd" userLabel="duration">
-                                                    <rect key="frame" x="310" y="30.5" width="50" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Dur" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZt-3b-THd" userLabel="duration">
+                                                    <rect key="frame" x="310" y="30" width="50" height="14.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="vST-Oz-oRF"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="3bM-BX-ayG"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="fWE-Bw-BT7" firstAttribute="top" secondItem="gWx-Fb-ceG" secondAttribute="bottom" constant="8" symbolic="YES" id="3AY-Ds-JsL"/>
-                                                <constraint firstItem="AZt-3b-THd" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="topMargin" constant="19" id="6lq-Ez-w8y"/>
                                                 <constraint firstItem="gWx-Fb-ceG" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="topMargin" constant="8" id="7Jz-7e-DPc"/>
-                                                <constraint firstItem="AZt-3b-THd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gWx-Fb-ceG" secondAttribute="trailing" constant="5" id="DBB-BA-IpY"/>
-                                                <constraint firstItem="AZt-3b-THd" firstAttribute="trailing" secondItem="Gzt-5h-1Dc" secondAttribute="trailingMargin" id="GZY-ny-XUZ"/>
                                                 <constraint firstItem="gWx-Fb-ceG" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="topMargin" constant="-12" id="K1s-cb-Cfz"/>
                                                 <constraint firstItem="gWx-Fb-ceG" firstAttribute="leading" secondItem="XsY-im-ava" secondAttribute="trailing" constant="30" id="LHo-Ll-bed"/>
                                                 <constraint firstItem="gWx-Fb-ceG" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="top" constant="19" id="QB9-nC-epp"/>
+                                                <constraint firstItem="AZt-3b-THd" firstAttribute="centerY" secondItem="Gzt-5h-1Dc" secondAttribute="centerY" id="TPr-g9-H5O"/>
+                                                <constraint firstItem="AZt-3b-THd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gWx-Fb-ceG" secondAttribute="trailing" constant="5" id="Y3J-3u-WjL"/>
                                                 <constraint firstItem="XsY-im-ava" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="top" constant="10" id="dam-8T-rIZ"/>
+                                                <constraint firstItem="AZt-3b-THd" firstAttribute="trailing" secondItem="Gzt-5h-1Dc" secondAttribute="trailingMargin" id="oPp-DZ-U1I"/>
                                                 <constraint firstItem="XsY-im-ava" firstAttribute="leading" secondItem="Gzt-5h-1Dc" secondAttribute="leading" constant="15" id="s6E-VE-6Lv"/>
                                                 <constraint firstAttribute="bottom" secondItem="XsY-im-ava" secondAttribute="bottom" constant="10" id="vhW-4l-20c"/>
                                                 <constraint firstItem="gWx-Fb-ceG" firstAttribute="leading" secondItem="fWE-Bw-BT7" secondAttribute="leading" id="xQm-is-zAu"/>

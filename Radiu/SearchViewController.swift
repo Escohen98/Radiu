@@ -51,30 +51,42 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
                 data1 = activeData[indexPath.item]
             }
             
-            cell.displayName.text = (data1 as! searchProperties).displayName
-            cell.title.text = "Awesome Stream!"//(data1 as! searchProperties).desc
-            cell.profileImage.image = UIImage(named: "hot_ico")
-              cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data1 as! searchProperties).createdAt)
+            //Fill label data
+            let data2 = data1 as! searchProperties
+            cell.displayName.text = (data2).displayName
+            cell.title.text = "Awesome Stream!"//(data2).desc
+            cell.profileImage.image = UIImage(named: getUser(creatorID: data2.creator).photoURL) ?? UIImage(named: "hot_ico")
+              cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data2).createdAt)
             
         } else if selected == "user" {
+            //Determines whether user has typed into search bar
             if isFiltering() {
                 data1 = filteredData[indexPath.item]
             } else {
                 data1 = userData[indexPath.item]
             }
             
-            cell.displayName.text = (data1 as! user).userName
-            cell.title.text = "Offline."
-            let newURL = URL(string: (data1 as! user).photoURL)
+            //Fill cell labels
+            let data2 = data1 as! user
+            cell.displayName.text = data2.userName
+            let stream = getUserChannel(creatorID: (data1 as! user).id)
+            if(stream.active) {
+                cell.title.text = stream.displayName
+            } else {
+                cell.title.text = "Offline."
+            }
+            //Fill Image
+            let newURL = URL(string: data2.photoURL)
             let other = URL(string: "https://cdn2.iconfinder.com/data/icons/music-colored-outlined-pixel-perfect/64/music-35-512.png")
             let photoData = try? Data(contentsOf: newURL ?? other!)
             if let imageData = photoData {
                 cell.profileImage.image = UIImage(data: imageData)
             }
             
+            //Fill stream duration if user is streaming
             cell.duration.text = ""
-            if isLive(id: (data1 as! user).id) {
-                cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data1 as! searchProperties).createdAt)
+            if isLive(id: data2.id) {
+                cell.duration.text = Duration().formatDuration(cell: cell, createdAt: getUserChannel(creatorID: data2.id).createdAt)
             }
         } else { //Same as live until subscribed is implemented.
             if isFiltering() {
@@ -82,11 +94,11 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             } else {
                 data1 = data[indexPath.item]
             }
-            
-            cell.displayName.text = (data1 as! searchProperties).displayName
-            cell.title.text = "Awesome Stream!"//(data1 as! searchProperties).desc
-            cell.profileImage.image = UIImage(named: "hot_ico")
-            cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data1 as! searchProperties).createdAt)
+            let data2 = data1 as! searchProperties
+            cell.displayName.text = (data2).displayName
+            cell.title.text = "Awesome Stream!"//(data2).desc
+            cell.profileImage.image = UIImage(named: getUser(creatorID: data2.creator).photoURL) ?? UIImage(named: "hot_ico")
+            cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data2).createdAt)
             
         }
     }

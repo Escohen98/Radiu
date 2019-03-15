@@ -54,3 +54,16 @@ struct user {
     var lastName: String = ""
     var userName: String = ""
 }
+
+/*struct searchProperties {
+ var id: String = ""
+ var desc: String = ""
+ var genre: String = ""
+ var createdAt: String = ""
+ var creator: Int = 0
+ var active: Bool = false
+ var displayName: String = ""
+ var activeListeners: [Int] = []
+ var followers: [Int] = []
+ 
+ }*/
