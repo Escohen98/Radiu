@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
     let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/channels"
+    let SUB_URL = "https://audio-api.kjgoodwin.me/v1/channels/followed"
     //let CHANNEL_URL = "https://api.jsonbin.io/b/5c885df5bb08b22a75695907?fbclid=IwAR2oZzwfwP-k52AMSBKlrWEUBRy1Xdh83WlmXfoQL98umJ2-DDD1RhuAe_w";
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -23,12 +24,10 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             return filteredData.count
         } else if selected == "live" {
             return activeData.count
-        } else if selected == "subscribed" {
-            //Implementation comes later
         } else if selected == "user" {
             return userData.count
         }
-        return data.count
+        return data.count //Also subscribed data
     }
 
     @IBOutlet weak var tableView: UITableView!
@@ -56,13 +55,19 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             }
             print("data1: \(data1 as! searchProperties)")
             cell.channelID = (data1 as! searchProperties).id
+            cell.active = (data1 as! searchProperties).active
             print("cell.channelID \(cell.channelID)")
             //Fill label data
             //let data2 = data1 as! searchProperties
-            cell.displayName.text = ((data1 as! searchProperties)).displayName //Main Label
+            cell.displayName.text = (data1 as! searchProperties).displayName //Main Label
             cell.title.text = "Awesome Stream!"//((data1 as! searchProperties)).desc //Secondary Label
             cell.title.textColor = .black
-            cell.profileImage.image = UIImage(named: (data1 as! searchProperties).creator["photoURL"].stringValue) ?? UIImage(named: "hot_ico") //Change later for creator object.
+            let newURL = URL(string: (data1 as! searchProperties).creator["photoURL"].stringValue)
+            let other = URL(string: "https://cdn2.iconfinder.com/data/icons/music-colored-outlined-pixel-perfect/64/music-35-512.png")
+            let photoData = try? Data(contentsOf: newURL ?? other!)
+            if let imageData = photoData {
+                cell.profileImage.image = UIImage(data: imageData)
+            } //Change later for creator object.
               cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             
         } else if selected == "user" {
@@ -107,10 +112,15 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             //let data2 = data1 as! searchProperties
             cell.displayName.text = ((data1 as! searchProperties)).displayName
             cell.title.text = (data1 as! searchProperties).desc
-            cell.profileImage.image = UIImage(named: (data1 as! searchProperties).creator["photoURL"].stringValue) ?? UIImage(named: "hot_ico") //Change later for creator object.
-            print("Image: \((data1 as! searchProperties).creator["photoURL"].stringValue)")
+            let newURL = URL(string: (data1 as! searchProperties).creator["photoURL"].stringValue)
+            let other = URL(string: "https://cdn2.iconfinder.com/data/icons/music-colored-outlined-pixel-perfect/64/music-35-512.png")
+            let photoData = try? Data(contentsOf: newURL ?? other!)
+            if let imageData = photoData {
+                cell.profileImage.image = UIImage(data: imageData)
+            } //Change later for creator object.
             cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             cell.channelID = (data1 as! searchProperties).id
+            cell.active = (data1 as! searchProperties).active
             print("cell.channelID \(cell.channelID)")
             
         }
@@ -119,8 +129,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     //Run when a cell is selected. Using for segue
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        if selected == "live" || selected == "subscribed" {
-            
+        if (cell as! searchCell).active && (selected == "live" || selected == "subscribed") {
             self.performSegue(withIdentifier: "streamSegue", sender: cell)
         } else {
             self.performSegue(withIdentifier: "profileSegue", sender: cell)
@@ -139,9 +148,6 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             
             print("sender: \((sender as! searchCell).channelID)")
             streamVC?.streamID = (sender as! searchCell).channelID
-        } else if selected == "subscribed" {
-            /* Add Data to be segued to StreamVC here*/
-            
         } else {
             /* Add Data to be segued to ProfileVC here*/
             
@@ -159,9 +165,10 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         //tableView.reloadData()
         //Refresh the data every time.
         download(CHANNEL_URL, self)
+        download(SUB_URL, self, true)
         users().download(self, tableView, completion: { (userData: Array<user>) in
             self.userData = userData
-            print("userData: \(self.userData)")
+            //print("userData: \(self.userData)")
             self.tableView.reloadData()
         }) //Safe-guard to prevent async problems.
     }
@@ -208,20 +215,25 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     var activeData: Array<searchProperties> = [] //For active streams
     var userData: Array<user> = [] //For user list
     
-    func download(_ url: String, _ VC: UIViewController)  {
-        activeData = []
+    func download(_ url: String, _ VC: UIViewController, _ isSubscribed: Bool = false)  {
+        if(!isSubscribed) {
+        activeData = [] //Clears Arrays
+        } else {
+            data = [] // Also subscribed data
+        }
         Repository.sessionManager.request(url).responseJSON{response in
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
                 for d in data.arrayValue {
                     let newStruct = searchProperties(id: d["channelID"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"], active: d["active"].boolValue, displayName: d["displayName"].stringValue, activeListeners: d["activeListeners"].arrayValue.map { $0.intValue}, followers: d["followers"].arrayValue.map { $0.intValue})
-                    self.data.append(newStruct)
-                    if newStruct.active {
+                    if !isSubscribed && newStruct.active {
                        self.activeData.append(newStruct)
+                    } else {
+                        self.data.append(newStruct)
                     }
                 }
                 self.tableView.reloadData()
-                print("Active data: \(self.activeData)")
+                //print("Active data: \(self.activeData)")
                 //We got the data, now we'll save the data in its state as a String
                 //UserDefaults.standard.set(data.rawString(), forKey: "searchStreams")
                 //now that we saved we can parse this inforamtion into another function
@@ -254,8 +266,6 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
                 return search.displayName.lowercased().contains(searchText.lowercased())
             })
         } else if selected == "subscribed" {
-            //Implementation Comes later
-            //Temporary
             filteredData = data.filter({( search : searchProperties) -> Bool in
                 return search.displayName.lowercased().contains(searchText.lowercased())
             })
@@ -330,4 +340,5 @@ class searchCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var duration: UILabel!
     var channelID : String = ""
+    var active = false
 }

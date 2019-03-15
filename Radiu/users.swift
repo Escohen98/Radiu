@@ -26,7 +26,7 @@ class users: NSObject {
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
                 for d in data.arrayValue {
-                print("Data: \(data)")
+                //print("Data: \(data)")
                     let newStruct = user(id: d["id"].intValue, photoURL: d["photoURL"].stringValue, firstName: d["firstName"].stringValue, lastName: d["lastName"].stringValue, userName: d["userName"].stringValue)
                     returnData.append(newStruct)
             }
