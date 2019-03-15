@@ -6,7 +6,7 @@
 //  Copyright © 2019 University of Washington. All rights reserved.
 //
 
-let STREAM_LIST_URL : String = "https://api.jsonbin.io/b/5c885df5bb08b22a75695907"
+let STREAM_LIST_URL : String = "https://api.jsonbin.io/b/5c8af732bb08b22a756bb9c3/1"
 let USER_LIST_URL : String = "https://api.jsonbin.io/b/5c86bfb88545b0611997cabd"
 
 import UIKit
@@ -36,11 +36,6 @@ class BrowseViewController: UITableViewController {
         let json = JSON(result)
         for stream_data in json.arrayValue {
           let stream = self.parseStreamList(stream_data)
-          print(stream.title)
-          print(stream.user)
-          print(stream.current_duration)
-          print(stream.image_url)
-          print("-------")
           self.streams.append(stream)
         }
         self.stream_list.reloadData()
@@ -67,18 +62,19 @@ class BrowseViewController: UITableViewController {
     
     let new_stream : Stream = Stream(name, user, 0, image_url)
     new_stream.current_duration = self.getDurationInSeconds(stream: stream)
+    print(new_stream.current_duration)
     let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { timer in
       new_stream.current_duration += 1
+      print("\(new_stream.title): \(new_stream.current_duration)")
       self.stream_list.reloadData()
     })
     return new_stream
   }
   
   func getDurationInSeconds(stream : JSON) -> Int {
-    if stream["goLiveTime"].exists() {
+    if stream["createdAt"].exists() {
       let current_date = Date()
-      let isoDate = stream["goLiveTime"].stringValue
-      
+      let isoDate = stream["createdAt"].stringValue
       
       let calendar = Calendar.current
       
@@ -87,7 +83,7 @@ class BrowseViewController: UITableViewController {
       dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
       let start_date = dateFormatter.date(from:isoDate)!
       
-      let current_duration = Int(calendar.component(.second, from: current_date)) - Int(calendar.component(.second, from: start_date))
+      let current_duration = (Int(calendar.component(.day, from: current_date) * 60 * 3600) - Int(calendar.component(.day, from: start_date)) * 60 * 3600) + (Int(calendar.component(.hour, from: current_date) * 3600) - Int(calendar.component(.hour, from: start_date)) * 3600) + (Int(calendar.component(.minute, from: current_date) * 60) - Int(calendar.component(.minute, from: start_date)) * 60) + (Int(calendar.component(.second, from: current_date)) - Int(calendar.component(.second, from: start_date)))
       print(current_duration)
       return current_duration
     } else {
