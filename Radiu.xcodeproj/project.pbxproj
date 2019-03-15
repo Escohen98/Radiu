@@ -10,11 +10,22 @@
 		4942B65F222F559400994674 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B65E222F559400994674 /* AppDelegate.swift */; };
 		4942B661222F559400994674 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B660222F559400994674 /* ViewController.swift */; };
 		4942B664222F559400994674 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942B662222F559400994674 /* Main.storyboard */; };
-		4942B667222F559400994674 /* Radiu.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4942B665222F559400994674 /* Radiu.xcdatamodeld */; };
 		4942B669222F559600994674 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4942B668222F559600994674 /* Assets.xcassets */; };
 		4942B66C222F559600994674 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942B66A222F559600994674 /* LaunchScreen.storyboard */; };
 		4942B677222F559600994674 /* RadiuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B676222F559600994674 /* RadiuTests.swift */; };
 		4942B682222F559600994674 /* RadiuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B681222F559600994674 /* RadiuUITests.swift */; };
+		4942B690222F5FB500994674 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B68F222F5FB500994674 /* SearchViewController.swift */; };
+		494B7A2B22364017007771F8 /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494B7A2A22364017007771F8 /* users.swift */; };
+		494B7A312238A2E8007771F8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494B7A2F2238A2E8007771F8 /* SignInViewController.swift */; };
+		494B7A34223B3334007771F8 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494B7A33223B3334007771F8 /* Duration.swift */; };
+		49B4E468223B5C8A00D76F46 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4E467223B5C8900D76F46 /* StreamViewController.swift */; };
+		49B4E46B223B5EF000D76F46 /* CommentTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4E469223B5EF000D76F46 /* CommentTVCell.swift */; };
+		49B4E46C223B5EF000D76F46 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4E46A223B5EF000D76F46 /* Comment.swift */; };
+		49B4E473223B61D800D76F46 /* Radiu.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49B4E46D223B61D800D76F46 /* Radiu.xcdatamodeld */; };
+		49B4E474223B61D800D76F46 /* stop.imageset in Resources */ = {isa = PBXBuildFile; fileRef = 49B4E46F223B61D800D76F46 /* stop.imageset */; };
+		49B4E475223B61D800D76F46 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4E470223B61D800D76F46 /* stop.png */; };
+		49B4E476223B61D800D76F46 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4E471223B61D800D76F46 /* play.png */; };
+		49B4E479223B668700D76F46 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4E478223B668700D76F46 /* Repository.swift */; };
 		4B5CD1B4A33F09BA49A68E34 /* Pods_Radiu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0D8C750A7F570D515FC9D6 /* Pods_Radiu.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +52,6 @@
 		4942B65E222F559400994674 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4942B660222F559400994674 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4942B663222F559400994674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4942B666222F559400994674 /* Radiu.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Radiu.xcdatamodel; sourceTree = "<group>"; };
 		4942B668222F559600994674 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4942B66B222F559600994674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4942B66D222F559600994674 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +61,18 @@
 		4942B67D222F559600994674 /* RadiuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadiuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4942B681222F559600994674 /* RadiuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiuUITests.swift; sourceTree = "<group>"; };
 		4942B683222F559600994674 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4942B68F222F5FB500994674 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		494B7A2A22364017007771F8 /* users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
+		494B7A2F2238A2E8007771F8 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		494B7A33223B3334007771F8 /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
+		49B4E467223B5C8900D76F46 /* StreamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamViewController.swift; sourceTree = "<group>"; };
+		49B4E469223B5EF000D76F46 /* CommentTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTVCell.swift; sourceTree = "<group>"; };
+		49B4E46A223B5EF000D76F46 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		49B4E46E223B61D800D76F46 /* Radiu.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Radiu.xcdatamodel; sourceTree = "<group>"; };
+		49B4E46F223B61D800D76F46 /* stop.imageset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = stop.imageset; sourceTree = "<group>"; };
+		49B4E470223B61D800D76F46 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
+		49B4E471223B61D800D76F46 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		49B4E478223B668700D76F46 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		A4207A3393AB35846C100AFC /* Pods-Radiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Radiu.debug.xcconfig"; path = "Target Support Files/Pods-Radiu/Pods-Radiu.debug.xcconfig"; sourceTree = "<group>"; };
 		AD6BF354FEDF4DB97884A59F /* Pods-Radiu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Radiu.release.xcconfig"; path = "Target Support Files/Pods-Radiu/Pods-Radiu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,7 +117,6 @@
 				A4207A3393AB35846C100AFC /* Pods-Radiu.debug.xcconfig */,
 				AD6BF354FEDF4DB97884A59F /* Pods-Radiu.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -124,13 +145,24 @@
 		4942B65D222F559400994674 /* Radiu */ = {
 			isa = PBXGroup;
 			children = (
+				49B4E478223B668700D76F46 /* Repository.swift */,
+				49B4E471223B61D800D76F46 /* play.png */,
+				49B4E46D223B61D800D76F46 /* Radiu.xcdatamodeld */,
+				49B4E46F223B61D800D76F46 /* stop.imageset */,
+				49B4E470223B61D800D76F46 /* stop.png */,
+				49B4E467223B5C8900D76F46 /* StreamViewController.swift */,
+				494B7A2F2238A2E8007771F8 /* SignInViewController.swift */,
 				4942B65E222F559400994674 /* AppDelegate.swift */,
 				4942B660222F559400994674 /* ViewController.swift */,
 				4942B662222F559400994674 /* Main.storyboard */,
+				49B4E46A223B5EF000D76F46 /* Comment.swift */,
+				49B4E469223B5EF000D76F46 /* CommentTVCell.swift */,
 				4942B668222F559600994674 /* Assets.xcassets */,
 				4942B66A222F559600994674 /* LaunchScreen.storyboard */,
 				4942B66D222F559600994674 /* Info.plist */,
-				4942B665222F559400994674 /* Radiu.xcdatamodeld */,
+				4942B68F222F5FB500994674 /* SearchViewController.swift */,
+				494B7A2A22364017007771F8 /* users.swift */,
+				494B7A33223B3334007771F8 /* Duration.swift */,
 			);
 			path = Radiu;
 			sourceTree = "<group>";
@@ -259,9 +291,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49B4E474223B61D800D76F46 /* stop.imageset in Resources */,
+				49B4E475223B61D800D76F46 /* stop.png in Resources */,
 				4942B66C222F559600994674 /* LaunchScreen.storyboard in Resources */,
 				4942B669222F559600994674 /* Assets.xcassets in Resources */,
 				4942B664222F559400994674 /* Main.storyboard in Resources */,
+				49B4E476223B61D800D76F46 /* play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +327,8 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Radiu/Pods-Radiu-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -299,6 +336,8 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,8 +375,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4942B661222F559400994674 /* ViewController.swift in Sources */,
-				4942B667222F559400994674 /* Radiu.xcdatamodeld in Sources */,
+				494B7A312238A2E8007771F8 /* SignInViewController.swift in Sources */,
+				4942B690222F5FB500994674 /* SearchViewController.swift in Sources */,
+				49B4E46B223B5EF000D76F46 /* CommentTVCell.swift in Sources */,
+				49B4E468223B5C8A00D76F46 /* StreamViewController.swift in Sources */,
+				49B4E473223B61D800D76F46 /* Radiu.xcdatamodeld in Sources */,
 				4942B65F222F559400994674 /* AppDelegate.swift in Sources */,
+				494B7A2B22364017007771F8 /* users.swift in Sources */,
+				49B4E46C223B5EF000D76F46 /* Comment.swift in Sources */,
+				494B7A34223B3334007771F8 /* Duration.swift in Sources */,
+				49B4E479223B668700D76F46 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,12 +717,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4942B665222F559400994674 /* Radiu.xcdatamodeld */ = {
+		49B4E46D223B61D800D76F46 /* Radiu.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4942B666222F559400994674 /* Radiu.xcdatamodel */,
+				49B4E46E223B61D800D76F46 /* Radiu.xcdatamodel */,
 			);
-			currentVersion = 4942B666222F559400994674 /* Radiu.xcdatamodel */;
+			currentVersion = 49B4E46E223B61D800D76F46 /* Radiu.xcdatamodel */;
 			path = Radiu.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
