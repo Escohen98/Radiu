@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Radiu/SearchViewController.swift"
-            timestampString = "574330017.558681"
+            timestampString = "574330772.77644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "84"
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Radiu/SearchViewController.swift"
-            timestampString = "574330017.559604"
+            timestampString = "574330772.778509"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
-            landmarkName = "filterContentForSearchText(_:scope:)"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "download(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

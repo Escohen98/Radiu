@@ -164,13 +164,17 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         selected = item.title!.lowercased()
         //tableView.reloadData()
         //Refresh the data every time.
-        download(CHANNEL_URL, self)
-        download(SUB_URL, self, true)
-        users().download(self, tableView, completion: { (userData: Array<user>) in
-            self.userData = userData
-            //print("userData: \(self.userData)")
-            self.tableView.reloadData()
-        }) //Safe-guard to prevent async problems.
+        if selected == "live" {
+            download(CHANNEL_URL, self)
+        } else if selected == "subscribed" {
+            download(SUB_URL, self, true)
+        } else {
+            users().download(self, tableView, completion: { (userData: Array<user>) in
+                self.userData = userData
+                //print("userData: \(self.userData)")
+                self.tableView.reloadData()
+            }) //Safe-guard to prevent async problems.
+        }
     }
     
     @IBOutlet weak var tabBar: UITabBar!
@@ -180,11 +184,12 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         download(CHANNEL_URL, self)
-        users().download(self, tableView, completion: { (userData: Array<user>) in
-            self.userData = userData
-            print("userData: \(self.userData)")
-            self.tableView.reloadData()
-        }) //Safe-guard to prevent async problems.
+        //download(SUB_URL, self, true)
+        //users().download(self, tableView, completion: { (userData: Array<user>) in
+        //    self.userData = userData
+        //    print("userData: \(self.userData)")
+        //    self.tableView.reloadData()
+        //}) //Safe-guard to prevent async problems.
         tabBar.selectedItem = tabBar.items![0]
         
         //Search taken from https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
@@ -224,6 +229,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         Repository.sessionManager.request(url).responseJSON{response in
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
+                print("Data Length: \(data.count)")
                 for d in data.arrayValue {
                     let newStruct = searchProperties(id: d["channelID"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"], active: d["active"].boolValue, displayName: d["displayName"].stringValue, activeListeners: d["activeListeners"].arrayValue.map { $0.intValue}, followers: d["followers"].arrayValue.map { $0.intValue})
                     if !isSubscribed && newStruct.active {
