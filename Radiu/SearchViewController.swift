@@ -27,14 +27,6 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         }
         return data.count
     }
-    
-    var selected = "live" //Selected tab
-    
-    //Handles tab bar selection changes
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        selected = item.title!.lowercased()
-        tableView.reloadData()
-    }
 
     @IBOutlet weak var tableView: UITableView!
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,6 +39,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         
         return cell
     }
+    
     
     //Specifies which tab is selected and assigns data/initializes cell accordingly.
     func initCell(cell: searchCell, indexPath: IndexPath) {
@@ -89,6 +82,43 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             cell.profileImage.image = UIImage(named: "hot_ico")
             
         }
+    }
+    
+    //Run when a cell is selected. Using for segue
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if selected == "live" {
+            //let streamVC = StreamViewController();
+            //self.present(streamVC, animated: true, completion: nil)
+        } else if selected == "subscribed" {
+            //let streamVC = StreamViewController();
+            //self.present(streamVC, animated: true, completion: nil)
+        } else {
+            //let profileVC = ProfileViewController();
+            //self.present(profileVC, animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: - Navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if selected == "live" {
+            /* Add Data to be segued to StreamVC here*/
+        } else if selected == "subscribed" {
+            /* Add Data to be segued to StreamVC here*/
+        } else {
+            /* Add Data to be segued to ProfileVC here*/
+        }
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        
+    }
+    
+    var selected = "live" //Selected tab
+    
+    //Handles tab bar selection changes
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        selected = item.title!.lowercased()
+        tableView.reloadData()
     }
     
     @IBOutlet weak var tabBar: UITabBar!
@@ -201,16 +231,6 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     func isActiveTab() -> Bool {
         return tabBar.selectedItem! == tabBar.items![0]
