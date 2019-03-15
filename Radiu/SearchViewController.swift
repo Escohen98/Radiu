@@ -53,7 +53,10 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             } else {
                 data1 = activeData[indexPath.item]
             }
-            
+            print("data1: \(data1 as! searchProperties)")
+            cell.channelID = (data1 as! searchProperties).id
+            print("cell.channelID")
+            print(cell.channelID)
             //Fill label data
             //let data2 = data1 as! searchProperties
             cell.displayName.text = ((data1 as! searchProperties)).displayName
@@ -105,24 +108,19 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             cell.title.text = (data1 as! searchProperties).desc
             cell.profileImage.image = UIImage(named: getUser(creatorID: (data1 as! searchProperties).creator["id"].intValue).photoURL) ?? UIImage(named: "hot_ico")
             cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
+            cell.channelID = (data1 as! searchProperties).id
             
         }
     }
     
     //Run when a cell is selected. Using for segue
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if selected == "live" {
-            //let streamVC = StreamViewController();
-            /* Add Data to be segued to StreamVC here*/
-            //self.present(streamVC, animated: true, completion: nil)
-        } else if selected == "subscribed" {
-            //let streamVC = StreamViewController();
-            /* Add Data to be segued to StreamVC here*/
-            //self.present(streamVC, animated: true, completion: nil)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "sCell", for: indexPath) as! searchCell
+        if selected == "live" || selected == "subcribed" {
+            
+            self.performSegue(withIdentifier: "streamSegue", sender: cell)
         } else {
-            //let profileVC = ProfileViewController();
-            /* Add Data to be segued to profileVC here*/
-            //self.present(profileVC, animated: true, completion: nil)
+            
         }
     }
     
@@ -130,12 +128,20 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if selected == "live" {
+        if selected == "live" || selected == "subscribed" {
             /* Add Data to be segued to StreamVC here*/
+            let streamVC = segue.destination as? StreamViewController
+            /* Add Data to be segued to StreamVC here*/
+            print("channelID")
+            
+            print((sender as! searchCell))
+            streamVC?.streamID = (sender as! searchCell).channelID
         } else if selected == "subscribed" {
             /* Add Data to be segued to StreamVC here*/
+            
         } else {
             /* Add Data to be segued to ProfileVC here*/
+            
         }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -148,6 +154,9 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         selected = item.title!.lowercased()
         tableView.reloadData()
+        if(selected == "user") {
+            
+        }
     }
     
     @IBOutlet weak var tabBar: UITabBar!
@@ -197,7 +206,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
                 for d in data.arrayValue {
-                    let newStruct = searchProperties(id: d["id"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"], active: d["active"].boolValue, displayName: d["displayName"].stringValue, activeListeners: d["activeListeners"].arrayValue.map { $0.intValue}, followers: d["followers"].arrayValue.map { $0.intValue})
+                    let newStruct = searchProperties(id: d["channelID"].stringValue, desc: d["discription"].stringValue, genre: d["genre"].stringValue, createdAt: d["createdAt"].stringValue, creator: d["creator"], active: d["active"].boolValue, displayName: d["displayName"].stringValue, activeListeners: d["activeListeners"].arrayValue.map { $0.intValue}, followers: d["followers"].arrayValue.map { $0.intValue})
                     self.data.append(newStruct)
                     if newStruct.active {
                        self.activeData.append(newStruct)
@@ -322,5 +331,5 @@ class searchCell: UITableViewCell {
     @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var duration: UILabel!
-    
+    var channelID : String = ""
 }

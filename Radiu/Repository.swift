@@ -13,6 +13,8 @@ class Repository{
     
     static var sessionManager = SessionManager()
     
+    static var currentAuthToken = ""
+    
     //static var currentComments : [Comment] = [Comment(text: "test comment", image: profileImageView!, username:"username"), Comment(text: "test comment", image: profileImageView!, username:"username"), Comment(text: "test comment", image: profileImageView!, username:"username")]
     
     //static var sessionManager = Alamofire.SessionManager.default
@@ -20,23 +22,14 @@ class Repository{
     class func beginSession(token: String){
         self.sessionManager.adapter = AccessTokenAdapter(accessToken: token)
     }
+    
+    class func setToken(token: String){
+        self.currentAuthToken = token
+    }
 
 //    class func getComments() -> [Comment]{
 //        return self.currentComments
 //    }
-    
-    //Implementation Coming Soon...
-    class func initializeRepo(){
-        
-        
-        let headers: HTTPHeaders = [
-            "Accept": "application/json"
-        ]
-        
-        self.sessionManager.request("https://api.creiland.me/v1/channels/43", headers: headers).responseJSON { response in
-            debugPrint(response)
-        }
-    }
     
     class func loginUser(email: String?, password: String?, completion: @escaping (String?) -> Void){
         
