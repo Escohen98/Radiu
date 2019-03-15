@@ -19,6 +19,7 @@
 		494B7A2B22364017007771F8 /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494B7A2A22364017007771F8 /* users.swift */; };
 		494B7A312238A2E8007771F8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494B7A2F2238A2E8007771F8 /* SignInViewController.swift */; };
 		494B7A322238A2E8007771F8 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494B7A302238A2E8007771F8 /* Repository.swift */; };
+		494B7A34223B3334007771F8 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494B7A33223B3334007771F8 /* Duration.swift */; };
 		4B5CD1B4A33F09BA49A68E34 /* Pods_Radiu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0D8C750A7F570D515FC9D6 /* Pods_Radiu.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		494B7A2A22364017007771F8 /* users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
 		494B7A2F2238A2E8007771F8 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		494B7A302238A2E8007771F8 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		494B7A33223B3334007771F8 /* Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
 		A4207A3393AB35846C100AFC /* Pods-Radiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Radiu.debug.xcconfig"; path = "Target Support Files/Pods-Radiu/Pods-Radiu.debug.xcconfig"; sourceTree = "<group>"; };
 		AD6BF354FEDF4DB97884A59F /* Pods-Radiu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Radiu.release.xcconfig"; path = "Target Support Files/Pods-Radiu/Pods-Radiu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +144,7 @@
 				4942B665222F559400994674 /* Radiu.xcdatamodeld */,
 				4942B68F222F5FB500994674 /* SearchViewController.swift */,
 				494B7A2A22364017007771F8 /* users.swift */,
+				494B7A33223B3334007771F8 /* Duration.swift */,
 			);
 			path = Radiu;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				4942B690222F5FB500994674 /* SearchViewController.swift in Sources */,
 				4942B65F222F559400994674 /* AppDelegate.swift in Sources */,
 				494B7A2B22364017007771F8 /* users.swift in Sources */,
+				494B7A34223B3334007771F8 /* Duration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

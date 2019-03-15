@@ -91,10 +91,22 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dur" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZt-3b-THd" userLabel="duration">
+                                                    <rect key="frame" x="310" y="30.5" width="50" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="vST-Oz-oRF"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="fWE-Bw-BT7" firstAttribute="top" secondItem="gWx-Fb-ceG" secondAttribute="bottom" constant="8" symbolic="YES" id="3AY-Ds-JsL"/>
+                                                <constraint firstItem="AZt-3b-THd" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="topMargin" constant="19" id="6lq-Ez-w8y"/>
                                                 <constraint firstItem="gWx-Fb-ceG" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="topMargin" constant="8" id="7Jz-7e-DPc"/>
+                                                <constraint firstItem="AZt-3b-THd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gWx-Fb-ceG" secondAttribute="trailing" constant="5" id="DBB-BA-IpY"/>
+                                                <constraint firstItem="AZt-3b-THd" firstAttribute="trailing" secondItem="Gzt-5h-1Dc" secondAttribute="trailingMargin" id="GZY-ny-XUZ"/>
                                                 <constraint firstItem="gWx-Fb-ceG" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="topMargin" constant="-12" id="K1s-cb-Cfz"/>
                                                 <constraint firstItem="gWx-Fb-ceG" firstAttribute="leading" secondItem="XsY-im-ava" secondAttribute="trailing" constant="30" id="LHo-Ll-bed"/>
                                                 <constraint firstItem="gWx-Fb-ceG" firstAttribute="top" secondItem="Gzt-5h-1Dc" secondAttribute="top" constant="19" id="QB9-nC-epp"/>
@@ -107,6 +119,7 @@
                                         <accessibility key="accessibilityConfiguration" identifier="sCell"/>
                                         <connections>
                                             <outlet property="displayName" destination="gWx-Fb-ceG" id="5J4-8j-UPs"/>
+                                            <outlet property="duration" destination="AZt-3b-THd" id="jjC-af-Drl"/>
                                             <outlet property="profileImage" destination="XsY-im-ava" id="XJQ-8m-Zh8"/>
                                             <outlet property="title" destination="fWE-Bw-BT7" id="bmG-2L-LEZ"/>
                                         </connections>

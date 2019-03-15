@@ -54,6 +54,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             cell.displayName.text = (data1 as! searchProperties).displayName
             cell.title.text = "Awesome Stream!"//(data1 as! searchProperties).desc
             cell.profileImage.image = UIImage(named: "hot_ico")
+              cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data1 as! searchProperties).createdAt)
             
         } else if selected == "user" {
             if isFiltering() {
@@ -70,6 +71,11 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             if let imageData = photoData {
                 cell.profileImage.image = UIImage(data: imageData)
             }
+            
+            cell.duration.text = ""
+            if isLive(id: (data1 as! user).id) {
+                cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data1 as! searchProperties).createdAt)
+            }
         } else { //Same as live until subscribed is implemented.
             if isFiltering() {
                 data1 = filteredData[indexPath.item]
@@ -80,6 +86,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             cell.displayName.text = (data1 as! searchProperties).displayName
             cell.title.text = "Awesome Stream!"//(data1 as! searchProperties).desc
             cell.profileImage.image = UIImage(named: "hot_ico")
+            cell.duration.text = Duration().formatDuration(cell: cell, createdAt: (data1 as! searchProperties).createdAt)
             
         }
     }
@@ -231,9 +238,37 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
-
-    func isActiveTab() -> Bool {
-        return tabBar.selectedItem! == tabBar.items![0]
+    
+    //Checks if given user is currently streaming. Returns true if yes, false otherwise.
+    func isLive(id: Int) -> Bool {
+        for active in activeData {
+            if active.creator == id {
+                return true
+            }
+        }
+        return false
+    }
+    
+    //Returns the channel information for the given user. Makes sure the user isLive. Returns the searchProperties object for the given user if Live, otherwise returns an empty object.
+    func getUserChannel(creatorID: Int) -> searchProperties {
+        if(isLive(id: creatorID)) {
+            for active in activeData {
+                if active.creator == creatorID {
+                    return active
+                }
+            }
+        }
+        return searchProperties()
+    }
+    
+    //Returns user information for given id. Since all active users are part of users, should return a filled user every time. If live user is somehow not in userData, returns empty user object.
+    func getUser(creatorID: Int) -> user {
+        for uD in userData {
+            if(creatorID == uD.id) {
+                return uD
+            }
+        }
+        return user()
     }
 }
 
@@ -255,10 +290,13 @@ struct searchProperties {
     var displayName: String = ""
     var activeListeners: [Int] = []
     var followers: [Int] = []
+    
 }
 
 class searchCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var duration: UILabel!
+    
 }
