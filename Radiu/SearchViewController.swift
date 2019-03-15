@@ -155,10 +155,14 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     //Handles tab bar selection changes
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         selected = item.title!.lowercased()
-        tableView.reloadData()
-        if(selected == "user") {
-            
-        }
+        //tableView.reloadData()
+        //Refresh the data every time.
+        download(CHANNEL_URL, self)
+        users().download(self, tableView, completion: { (userData: Array<user>) in
+            self.userData = userData
+            print("userData: \(self.userData)")
+            self.tableView.reloadData()
+        }) //Safe-guard to prevent async problems.
     }
     
     @IBOutlet weak var tabBar: UITabBar!
@@ -204,6 +208,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     var userData: Array<user> = [] //For user list
     
     func download(_ url: String, _ VC: UIViewController)  {
+        activeData = []
         Repository.sessionManager.request(url).responseJSON{response in
             if response.result.value != nil {
                 let data = JSON(response.result.value as Any)
