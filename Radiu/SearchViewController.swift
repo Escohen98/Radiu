@@ -63,7 +63,6 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             cell.title.text = "Awesome Stream!"//((data1 as! searchProperties)).desc
             cell.title.textColor = .black
             cell.profileImage.image = UIImage(named: (data1 as! searchProperties).creator["photoURL"].stringValue) ?? UIImage(named: "hot_ico") //Change later for creator object.
-            print("Image: \((data1 as! searchProperties).creator["photoURL"].stringValue)")
               cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! searchProperties)).createdAt)
             
         } else if selected == "user" {
