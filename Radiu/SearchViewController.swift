@@ -179,7 +179,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             if (sender as? searchCell)!.active {
                 profileVC?.activeStream = getUserChannel(creatorID: Int((sender as? searchCell)!.id) ?? -1)
             }
-        } else if segue.identifier == "userProfileSegue" {
+        } else if segue.identifier == "profileUserSegue" {
             let profileVC = segue.destination as? ProfileViewController
             profileVC?.selected = self.selected
             profileVC?.isActiveUser = true //Indicates that this is the logged in user.
