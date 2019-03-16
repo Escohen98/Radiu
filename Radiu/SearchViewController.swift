@@ -209,6 +209,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         download(CHANNEL_URL, self)
+        download(SUB_URL, self) //In-case they press the profile button.
         //download(SUB_URL, self, true)
         //users().download(self, tableView, completion: { (userData: Array<user>) in
         //    self.userData = userData
