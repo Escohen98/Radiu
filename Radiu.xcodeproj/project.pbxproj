@@ -27,7 +27,7 @@
 		49B4E476223B61D800D76F46 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4E471223B61D800D76F46 /* play.png */; };
 		49B4E479223B668700D76F46 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4E478223B668700D76F46 /* Repository.swift */; };
 		49B4E47D223C6E4A00D76F46 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4E47C223C6E4A00D76F46 /* ProfileViewController.swift */; };
-		4B5CD1B4A33F09BA49A68E34 /* Pods_Radiu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0D8C750A7F570D515FC9D6 /* Pods_Radiu.framework */; };
+		F4F055EB7C42662BDCD67932 /* Pods_Radiu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0D8C750A7F570D515FC9D6 /* Pods_Radiu.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B5CD1B4A33F09BA49A68E34 /* Pods_Radiu.framework in Frameworks */,
+				F4F055EB7C42662BDCD67932 /* Pods_Radiu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
