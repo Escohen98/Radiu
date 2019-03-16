@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,20 +15,20 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RadiU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfj-Nz-o8m">
-                                <rect key="frame" x="89" y="185" width="236" height="96"/>
+                                <rect key="frame" x="42" y="102" width="236" height="92"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="100"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveform-vector-6" translatesAutoresizingMaskIntoConstraints="NO" id="MNk-xF-w6G">
-                                <rect key="frame" x="92" y="359" width="230" height="178"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="waveform-vector-6" translatesAutoresizingMaskIntoConstraints="NO" id="MNk-xF-w6G">
+                                <rect key="frame" x="79" y="272" width="163" height="122"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="178" id="7Gk-oQ-7AF"/>
-                                    <constraint firstAttribute="height" constant="178" id="jZB-8l-e8L"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="122" id="7Gk-oQ-7AF"/>
+                                    <constraint firstAttribute="height" constant="122" id="jZB-8l-e8L"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -36,10 +36,10 @@
                         <constraints>
                             <constraint firstItem="Sfj-Nz-o8m" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OEe-76-Yin"/>
                             <constraint firstItem="MNk-xF-w6G" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Sfj-Nz-o8m" secondAttribute="bottom" constant="78" id="PAH-W7-7YK"/>
-                            <constraint firstItem="MNk-xF-w6G" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Qxp-bT-y8z"/>
-                            <constraint firstItem="MNk-xF-w6G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="92" id="WTJ-fz-3rj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MNk-xF-w6G" secondAttribute="bottom" constant="325" id="hgB-qU-VRH"/>
-                            <constraint firstItem="Sfj-Nz-o8m" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="141" id="s63-R9-VK1"/>
+                            <constraint firstItem="MNk-xF-w6G" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="49" id="Qxp-bT-y8z"/>
+                            <constraint firstItem="MNk-xF-w6G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="79" id="WTJ-fz-3rj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MNk-xF-w6G" secondAttribute="bottom" constant="174" id="hgB-qU-VRH"/>
+                            <constraint firstItem="Sfj-Nz-o8m" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="82" id="s63-R9-VK1"/>
                             <constraint firstItem="Sfj-Nz-o8m" firstAttribute="centerX" secondItem="MNk-xF-w6G" secondAttribute="centerX" id="u0c-ii-jL0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -47,7 +47,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+            <point key="canvasLocation" x="50.625" y="375"/>
         </scene>
     </scenes>
     <resources>
