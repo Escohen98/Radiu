@@ -23,6 +23,7 @@ class ProfileViewController: UIViewController {
     var subscribedData: Array<channel> = [] //Channels user is subscribed to
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("browseVC?.selected: \(selected)")
         if !isActiveUser {
             //Pull user data from API
             //Intialize userData and activeStream
@@ -31,14 +32,18 @@ class ProfileViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
-
+    var selected = "" //Allows user to go back to tab they were on.
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "profileToBrowse" {
+            let browseVC = segue.destination as? Search
+            browseVC?.selected = self.selected
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }

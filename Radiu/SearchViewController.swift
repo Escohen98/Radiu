@@ -151,8 +151,10 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         let cell = tableView.cellForRow(at: indexPath)
         if (cell as! searchCell).active && (selected == "live" || selected == "subscribed") {
             self.performSegue(withIdentifier: "streamSegue", sender: cell)
-        } else {
+        } else if selected == "user" {
             self.performSegue(withIdentifier: "profileSegue", sender: cell)
+        } else {
+            cell?.isSelected = false;
         }
     }
     
@@ -171,13 +173,15 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         } else if segue.identifier == "profileSegue" {
             /* Add Data to be segued to ProfileVC here*/
             let profileVC = segue.destination as? ProfileViewController
+            profileVC?.selected = self.selected
             profileVC?.userData = getUser(creatorID: Int((sender as? searchCell)!.id) ?? -1)
             profileVC?.subscribedData = data
             if (sender as? searchCell)!.active {
                 profileVC?.activeStream = getUserChannel(creatorID: Int((sender as? searchCell)!.id) ?? -1)
             }
-        } else if segue.identifier == "userProfileSegue" {
+        } else if segue.identifier == "profileUserSegue" {
             let profileVC = segue.destination as? ProfileViewController
+            profileVC?.selected = self.selected
             profileVC?.isActiveUser = true //Indicates that this is the logged in user.
             //profileVC?.userData = Figure out how to get logged-in user data.
             profileVC?.subscribedData = data
@@ -193,7 +197,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         
     }
     
-    var selected = "live" //Selected tab
+    var selected: String = "live"//Selected tab
     
     //Handles tab bar selection changes
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -219,6 +223,18 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     //Downloads JSON file, initializes tableView, then tries to set searchBar color to black
     override func viewDidLoad() {
         super.viewDidLoad()
+        if selected == "user" {
+            users().download(self, tableView, completion: { (userData: Array<user>) in
+                self.userData = userData
+                //print("userData: \(self.userData)")
+                self.tableView.reloadData()
+            }) //Safe-guard to prevent async problems.
+             tabBar.selectedItem = tabBar.items![2]
+        } else if selected == "subscribed" {
+            tabBar.selectedItem = tabBar.items![1]
+        } else {
+            tabBar.selectedItem = tabBar.items![0]
+        }
         download(CHANNEL_URL, self)
         download(SUB_URL, self) //In-case they press the profile button.
         //download(SUB_URL, self, true)
@@ -227,8 +243,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         //    print("userData: \(self.userData)")
         //    self.tableView.reloadData()
         //or}) //Safe-guard to prevent async problems.
-        tabBar.selectedItem = tabBar.items![0]
-        
+        print("selected: \(selected)")
         //Search taken from https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
         // Setup the Search Controller
         searchController.searchResultsUpdater = self as UISearchResultsUpdating
