@@ -38,7 +38,7 @@
         <!--Profile View Controller-->
         <scene sceneID="GaQ-Bw-0hi">
             <objects>
-                <viewController id="10G-dy-Yan" userLabel="Profile View Controller" sceneMemberID="viewController">
+                <viewController id="10G-dy-Yan" userLabel="Profile View Controller" customClass="SearchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cmN-BN-GEL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -433,7 +433,6 @@
         <image name="user_ico" width="18.75" height="18.75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zYw-Xy-Peo"/>
         <segue reference="Sy9-8I-gtw"/>
     </inferredMetricsTieBreakers>
 </document>

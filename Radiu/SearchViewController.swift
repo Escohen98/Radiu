@@ -80,7 +80,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             
             //Fill cell labels
             cell.displayName.text = (data1 as! user).userName //Main Label
-            cell.id = (data1 as! user).id
+            cell.id = String((data1 as! user).id)
             let stream = getUserChannel(creatorID: (data1 as! user).id)
             if(stream.active) {
                 cell.title.text = "Live" //Secondary Label
@@ -160,9 +160,22 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         } else if segue.identifier == "profileSegue" {
             /* Add Data to be segued to ProfileVC here*/
             let profileVC = segue.destination as? ProfileViewController
-            //profileVC.userData = (sender as! userData)
+            profileVC?.userData = getUser(creatorID: Int((sender as? searchCell)!.id) ?? -1)
+            profileVC?.subscribedData = data
+            if (sender as? searchCell)!.active {
+                profileVC?.activeStream = getUserChannel(creatorID: Int((sender as? searchCell)!.id) ?? -1)
+            }
         } else if segue.identifier == "userProfileSegue" {
-            
+            let profileVC = segue.destination as? ProfileViewController
+            profileVC?.isActiveUser = true //Indicates that this is the logged in user.
+            //profileVC?.userData = Figure out how to get logged-in user data.
+            profileVC?.subscribedData = data
+            /*
+             Figure this out too
+             if (sender as? searchCell)!.active {
+             profileVC?.activeStream = getUserChannel(creatorID: Int((sender as? searchCell)!.id) ?? -1)
+             }
+             */
         }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -328,6 +341,16 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             }
         }
         return channel()
+    }
+    
+    //Returns user information for given id. Since all active users are part of users, should return a filled user every time. If live user is somehow not in userData, returns empty user object.
+    func getUser(creatorID: Int) -> user {
+        for uD in userData {
+            if(creatorID == uD.id) {
+                return uD
+            }
+        }
+        return user()
     }
 }
 

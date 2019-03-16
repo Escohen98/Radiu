@@ -9,7 +9,9 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-     var userData: user = user() //The user's profile
+    var isActiveUser: Bool = false //True if profile matches the logged in user; false otherwise.
+    var userData: user = user() //The user's profile. Empty if isActiveUser is false.
+    var activeStream: channel = channel() //Empty if given user is not streaming or if isActiveUser is false. Filled otherwise. Assumes user can only run 1 stream at a given time.
     
     /*
      * Condition: current user profile
@@ -19,11 +21,13 @@ class ProfileViewController: UIViewController {
      * Note: May not be necessary
     */
     var subscribedData: Array<channel> = [] //Channels user is subscribed to
-    var activeStream: channel = channel() //Empty if given user is not streaming. Filled otherwise. Assumes user can only run 1 stream at a given time.
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if !isActiveUser {
+            //Pull user data from API
+            //Intialize userData and activeStream
+            //May need some helper functions from StreamViewController (isLive, getUser, and getUserChannel. Maybe make a protocol or new class?)
+        }
     }
     
 
