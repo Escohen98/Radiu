@@ -151,8 +151,10 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         let cell = tableView.cellForRow(at: indexPath)
         if (cell as! searchCell).active && (selected == "live" || selected == "subscribed") {
             self.performSegue(withIdentifier: "streamSegue", sender: cell)
-        } else {
+        } else if selected == "user" {
             self.performSegue(withIdentifier: "profileSegue", sender: cell)
+        } else {
+            cell?.isSelected = false;
         }
     }
     
