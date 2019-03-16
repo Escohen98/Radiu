@@ -26,6 +26,7 @@
 		49B4E475223B61D800D76F46 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4E470223B61D800D76F46 /* stop.png */; };
 		49B4E476223B61D800D76F46 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 49B4E471223B61D800D76F46 /* play.png */; };
 		49B4E479223B668700D76F46 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4E478223B668700D76F46 /* Repository.swift */; };
+		49B4E47D223C6E4A00D76F46 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4E47C223C6E4A00D76F46 /* ProfileViewController.swift */; };
 		4B5CD1B4A33F09BA49A68E34 /* Pods_Radiu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0D8C750A7F570D515FC9D6 /* Pods_Radiu.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		49B4E470223B61D800D76F46 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		49B4E471223B61D800D76F46 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		49B4E478223B668700D76F46 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		49B4E47C223C6E4A00D76F46 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A4207A3393AB35846C100AFC /* Pods-Radiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Radiu.debug.xcconfig"; path = "Target Support Files/Pods-Radiu/Pods-Radiu.debug.xcconfig"; sourceTree = "<group>"; };
 		AD6BF354FEDF4DB97884A59F /* Pods-Radiu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Radiu.release.xcconfig"; path = "Target Support Files/Pods-Radiu/Pods-Radiu.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +165,7 @@
 				4942B68F222F5FB500994674 /* SearchViewController.swift */,
 				494B7A2A22364017007771F8 /* users.swift */,
 				494B7A33223B3334007771F8 /* Duration.swift */,
+				49B4E47C223C6E4A00D76F46 /* ProfileViewController.swift */,
 			);
 			path = Radiu;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				49B4E46B223B5EF000D76F46 /* CommentTVCell.swift in Sources */,
 				49B4E468223B5C8A00D76F46 /* StreamViewController.swift in Sources */,
 				49B4E473223B61D800D76F46 /* Radiu.xcdatamodeld in Sources */,
+				49B4E47D223C6E4A00D76F46 /* ProfileViewController.swift in Sources */,
 				4942B65F222F559400994674 /* AppDelegate.swift in Sources */,
 				494B7A2B22364017007771F8 /* users.swift in Sources */,
 				49B4E46C223B5EF000D76F46 /* Comment.swift in Sources */,
