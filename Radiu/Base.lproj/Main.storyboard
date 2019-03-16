@@ -23,13 +23,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="Gor-CG-DM3" kind="show" id="Bxj-qt-gMz"/>
+                                    <segue destination="Gor-CG-DM3" kind="show" identifier="loginButtonSegue" id="Bxj-qt-gMz"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <segue destination="Gor-CG-DM3" kind="show" identifier="goToMainUI" id="160-ok-8lz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -461,7 +464,8 @@
         <image name="user_ico" width="18.75" height="18.75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Sy9-8I-gtw"/>
+        <segue reference="160-ok-8lz"/>
+        <segue reference="p2S-kz-Gl0"/>
         <segue reference="1P7-6P-hOy"/>
     </inferredMetricsTieBreakers>
 </document>
