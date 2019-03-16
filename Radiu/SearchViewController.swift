@@ -62,6 +62,8 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             cell.displayName.text = (data1 as! channel).displayName //Main Label
             cell.title.text = "Awesome Stream!"//((data1 as! channel)).desc //Secondary Label
             cell.title.textColor = .black
+             cell.activeListener.isHidden = false
+            setActiveListenersText(cell: cell, activeListeners: (data1 as! channel).activeListeners)
             let newURL = URL(string: (data1 as! channel).creator["photoURL"].stringValue)
             let other = URL(string: "https://cdn2.iconfinder.com/data/icons/music-colored-outlined-pixel-perfect/64/music-35-512.png")
             let photoData = try? Data(contentsOf: newURL ?? other!)
@@ -82,9 +84,12 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             cell.displayName.text = (data1 as! user).userName //Main Label
             cell.id = String((data1 as! user).id)
             let stream = getUserChannel(creatorID: (data1 as! user).id)
+            cell.activeListener.isHidden = true
             if(stream.active) {
                 cell.title.text = "Live" //Secondary Label
                 cell.title.textColor = UIColor(hue: 0.3917, saturation: 1, brightness: 0.69, alpha: 1.0)
+                cell.activeListener.isHidden = false
+                setActiveListenersText(cell: cell, activeListeners: stream.activeListeners)
             } else {
                 cell.title.textColor = UIColor(hue: 0, saturation: 1, brightness: 0.93, alpha: 1.0)
                 cell.title.text = "Offline."
@@ -102,13 +107,15 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             if isLive(id: (data1 as! user).id) {
                 cell.duration.text = Duration().formatDuration(cell: cell, createdAt: getUserChannel(creatorID: (data1 as! user).id).createdAt)
             }
-        } else { //Same as live until subscribed is implemented.
+        } else { //Subscribed
             if isFiltering() {
                 data1 = filteredData[indexPath.item]
             } else {
                 data1 = data[indexPath.item]
             }
+            
             cell.active = (data1 as! channel).active
+
             //let data2 = data1 as! channel
             cell.displayName.text = ((data1 as! channel)).displayName
             //Offline state.
@@ -122,11 +129,15 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             }
             
             //Sets cell duration only if active. Changes description to stream description and color back to dark gray.
-            cell.duration.text = ""
+            cell.duration.isHidden = true
+            cell.activeListener.isHidden = true
             if(cell.active) {
+                cell.duration.isHidden = false
                 cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! channel)).createdAt)
                  cell.title.text = (data1 as! channel).desc
                 cell.title.textColor = .darkGray
+                cell.activeListener.isHidden = false
+                setActiveListenersText(cell: cell, activeListeners: (data1 as! channel).activeListeners)
             }
             cell.id = (data1 as! channel).id
 
@@ -279,6 +290,28 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         }
     }
     
+
+ 
+    //Taken from https://stackoverflow.com/questions/19318421/how-to-embed-small-icon-in-uilabel
+    func setActiveListenersText(cell: searchCell, activeListeners: Array<Int>) {
+        //Create Attachment
+        let imageAttachment =  NSTextAttachment()
+        imageAttachment.image = UIImage(named:"user_ico")
+        //Set bound to reposition
+        let imageOffsetY:CGFloat = -5.0;
+        imageAttachment.bounds = CGRect(x: 0, y: imageOffsetY, width: imageAttachment.image!.size.width, height: imageAttachment.image!.size.height)
+        //Create string with attachment
+        let attachmentString = NSAttributedString(attachment: imageAttachment)
+        //Initialize mutable string
+        let completeText = NSMutableAttributedString(string: "")
+        //Add image to mutable string
+        completeText.append(attachmentString)
+        //Add your text to mutable string
+        let  textAfterIcon = NSMutableAttributedString(string: String(activeListeners.count))
+        completeText.append(textAfterIcon)
+        cell.activeListener.attributedText = completeText
+    }
+    
     //Taken from https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
     // MARK: - Private instance methods
 
@@ -381,6 +414,7 @@ class searchCell: UITableViewCell {
     @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak var activeListener: UILabel!
     var id : String = ""
     var active = false
 }
