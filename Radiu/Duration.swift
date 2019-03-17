@@ -48,9 +48,9 @@ class Duration: NSObject {
     
     func formatDuration(cell: searchCell, createdAt: String) -> String {
         let current_duration = getDurationInSeconds(isoDate: createdAt)
-        let seconds = current_duration % 60
-        let minutes = current_duration / 60
-        let hours = minutes / 60
+        let hours = current_duration / 3600
+        let minutes = (current_duration - (hours * 3600)) / 60
+        let seconds = (current_duration - (hours * 3600) - (minutes * 60))
         
         var duration = "\(String(seconds))"
         if(seconds < 10) {
@@ -62,6 +62,8 @@ class Duration: NSObject {
                 duration = "\(String(hours)):\(duration)"
             }
         }
+      
+        print(duration)
         return duration
     }
 }
