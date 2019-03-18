@@ -11,21 +11,152 @@ import Alamofire
 import SwiftyJSON
 
 class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
-  let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/channels"
-  let SUB_URL = "https://audio-api.kjgoodwin.me/v1/channels/followed"
-  //let CHANNEL_URL = "https://api.jsonbin.io/b/5c885df5bb08b22a75695907?fbclid=IwAR2oZzwfwP-k52AMSBKlrWEUBRy1Xdh83WlmXfoQL98umJ2-DDD1RhuAe_w";
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //print(data.arrayValue.count)
-    if isFiltering() { //When the user is typing in the search bar
-      if(selected == "user") {
-        return filteredUserData.count
-      }
-      return filteredData.count
-    } else if selected == "live" {
-      return activeData.count
-    } else if selected == "user" {
-      return userData.count
+    let CHANNEL_URL = "https://audio-api.kjgoodwin.me/v1/channels"
+    let SUB_URL = "https://audio-api.kjgoodwin.me/v1/channels/followed"
+    //let CHANNEL_URL = "https://api.jsonbin.io/b/5c885df5bb08b22a75695907?fbclid=IwAR2oZzwfwP-k52AMSBKlrWEUBRy1Xdh83WlmXfoQL98umJ2-DDD1RhuAe_w";
+   
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //print(data.arrayValue.count)
+        if isFiltering() { //When the user is typing in the search bar
+            if(selected == "user") {
+                return filteredUserData.count
+            }
+            return filteredData.count
+        } else if selected == "live" {
+            return activeData.count
+        } else if selected == "user" {
+            return userData.count
+        }
+        return data.count //Also subscribed data
+    }
+
+    @IBOutlet weak var tableView: UITableView!
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "sCell", for: indexPath) as! searchCell
+        
+        initCell(cell: cell, indexPath: indexPath)
+        //TODO - Filter out non-active streams when Live tabbar is selected
+        
+        
+        
+        return cell
+    }
+    
+    
+    //Specifies which tab is selected and assigns data/initializes cell accordingly.
+    func initCell(cell: searchCell, indexPath: IndexPath) {
+        let data1: Any
+
+        if selected == "live" {
+            if isFiltering() {
+                data1 = filteredData[indexPath.item]
+            } else {
+                data1 = activeData[indexPath.item]
+            }
+            print("data1: \(data1 as! channel)")
+            cell.id = (data1 as! channel).id
+            cell.active = (data1 as! channel).active
+            print("cell.id \(cell.id)")
+            //Fill label data
+            //let data2 = data1 as! channel
+            cell.displayName.text = (data1 as! channel).displayName //Main Label
+            cell.title.text = (data1 as! channel).creator["userName"].stringValue//((data1 as! channel)).desc //Secondary Label
+            
+            cell.title.textColor = .black
+             cell.activeListener.isHidden = false
+            setActiveListenersText(cell: cell, activeListeners: (data1 as! channel).activeListeners)
+            let newURL = URL(string: (data1 as! channel).creator["photoURL"].stringValue)
+            let other = URL(string: "https://cdn2.iconfinder.com/data/icons/music-colored-outlined-pixel-perfect/64/music-35-512.png")
+            let photoData = try? Data(contentsOf: newURL ?? other!)
+            if let imageData = photoData {
+                cell.profileImage.image = UIImage(data: imageData)
+            } //Change later for creator object.
+              cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! channel)).createdAt)
+            
+        } else if selected == "user" {
+            //Determines whether user has typed into search bar
+            if isFiltering() {
+                data1 = filteredUserData[indexPath.item]
+            } else {
+                data1 = userData[indexPath.item]
+            }
+            
+            //Fill cell labels
+            cell.displayName.text = (data1 as! user).userName //Main Label
+            cell.id = String((data1 as! user).id)
+            let stream = getUserChannel(creatorID: (data1 as! user).id)
+            cell.activeListener.isHidden = true
+            if(stream.active) {
+                cell.title.text = "Live" //Secondary Label
+                cell.title.textColor = UIColor(hue: 0.3917, saturation: 1, brightness: 0.69, alpha: 1.0)
+                cell.activeListener.isHidden = false
+                setActiveListenersText(cell: cell, activeListeners: stream.activeListeners)
+            } else {
+                cell.title.textColor = UIColor(hue: 0, saturation: 1, brightness: 0.93, alpha: 1.0)
+                cell.title.text = "Offline."
+            }
+            //Fill Image
+            let newURL = URL(string: (data1 as! user).photoURL)
+            let other = URL(string: "https://cdn2.iconfinder.com/data/icons/music-colored-outlined-pixel-perfect/64/music-35-512.png")
+            let photoData = try? Data(contentsOf: newURL ?? other!)
+            if let imageData = photoData {
+                cell.profileImage.image = UIImage(data: imageData)
+            }
+            
+            //Fill stream duration if user is streaming
+            cell.duration.text = ""
+            if isLive(id: (data1 as! user).id) {
+                cell.duration.text = Duration().formatDuration(cell: cell, createdAt: getUserChannel(creatorID: (data1 as! user).id).createdAt)
+            }
+        } else { //Subscribed
+            if isFiltering() {
+                data1 = filteredData[indexPath.item]
+            } else {
+                data1 = data[indexPath.item]
+            }
+            
+            cell.active = (data1 as! channel).active
+
+            //let data2 = data1 as! channel
+            cell.displayName.text = ((data1 as! channel)).displayName
+            //Offline state.
+            cell.title.text = "Offline."
+            cell.title.textColor = UIColor(hue: 0, saturation: 1, brightness: 0.93, alpha: 1.0)
+            let newURL = URL(string: (data1 as! channel).creator["photoURL"].stringValue)
+            let other = URL(string: "https://cdn2.iconfinder.com/data/icons/music-colored-outlined-pixel-perfect/64/music-35-512.png")
+            let photoData = try? Data(contentsOf: newURL ?? other!)
+            if let imageData = photoData {
+                cell.profileImage.image = UIImage(data: imageData)
+            }
+            
+            //Sets cell duration only if active. Changes description to stream description and color back to dark gray.
+            cell.duration.isHidden = true
+            cell.activeListener.isHidden = true
+            if(cell.active) {
+                cell.duration.isHidden = false
+                cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! channel)).createdAt)
+                 cell.title.text = (data1 as! channel).creator["userName"].stringValue
+                cell.title.textColor = .darkGray
+                cell.activeListener.isHidden = false
+                setActiveListenersText(cell: cell, activeListeners: (data1 as! channel).activeListeners)
+            }
+            cell.id = (data1 as! channel).id
+
+            print("cell.id \(cell.id)")
+            
+        }
+    }
+    
+    //Run when a cell is selected. Using for segue
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        if (cell as! searchCell).active && (selected == "live" || selected == "subscribed") {
+            self.performSegue(withIdentifier: "streamSegue", sender: cell)
+        } else if selected == "user" {
+            self.performSegue(withIdentifier: "profileSegue", sender: cell)
+        } else {
+            cell?.isSelected = false;
+        }
     }
     return data.count //Also subscribed data
   }
@@ -34,8 +165,47 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "sCell", for: indexPath) as! searchCell
     
-    initCell(cell: cell, indexPath: indexPath)
-    //TODO - Filter out non-active streams when Live tabbar is selected
+    //Probably don't need this
+    // MARK: - Navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "streamSegue" {
+            /* Add Data to be segued to StreamVC here*/
+            let streamVC = segue.destination as! StreamViewController
+            /* Add Data to be segued to StreamVC here*/
+            print("id")
+            
+            print("sender: \((sender as! searchCell).id)")
+            streamVC.streamID = (sender as! searchCell).id
+            streamVC.streamCreatorName = (sender as! searchCell).title.text!
+            print("heeeeeeere")
+            print((sender as! searchCell).title.text!)
+        } else if segue.identifier == "profileSegue" {
+            /* Add Data to be segued to ProfileVC here*/
+            let profileVC = segue.destination as? ProfileViewController
+            profileVC?.selected = self.selected
+            profileVC?.userData = getUser(creatorID: Int((sender as? searchCell)!.id) ?? -1)
+            profileVC?.subscribedData = data
+            if (sender as? searchCell)!.active {
+                profileVC?.activeStream = getUserChannel(creatorID: Int((sender as? searchCell)!.id) ?? -1)
+            }
+        } else if segue.identifier == "profileUserSegue" {
+            let profileVC = segue.destination as? ProfileViewController
+            profileVC?.selected = self.selected
+            profileVC?.isActiveUser = true //Indicates that this is the logged in user.
+            //profileVC?.userData = Figure out how to get logged-in user data.
+            profileVC?.subscribedData = data
+            /*
+             Figure this out too
+             if (sender as? searchCell)!.active {
+             profileVC?.activeStream = getUserChannel(creatorID: Int((sender as? searchCell)!.id) ?? -1)
+             }
+             */
+        }
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        
+    }
     
     
     
