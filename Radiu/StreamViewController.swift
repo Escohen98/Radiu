@@ -56,6 +56,7 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var bottomStack: UIStackView!
     
     //comment buttons
     @IBOutlet weak var postCommentBtn: UIButton!
@@ -71,7 +72,10 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
         
         profileImg = URL(string: "https://www.gravatar.com/avatar/8849642f880e4fa6dd04634efd44a87f")
         //profileImageView = UIImageView(image: profileImg!)
-        comments = [Comment(text: "test comment i'm trying to make this really long just to see what happens", image: profileImg!, username:"username"), Comment(text: "test comment", image: profileImg!, username:"username"), Comment(text: "test comment", image: profileImg!, username:"username")]
+        comments = [Comment(text: "New comments will appear here", image: profileImg!, username:"Radiu")]
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         
         //self.comments = CommentRepository.getComments()
@@ -117,6 +121,20 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
         print(streamID)
     }
     
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
     deinit {
         socket.disconnect(forceTimeout: 0)
         socket.delegate = nil
@@ -146,7 +164,7 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
                         return
                     }
             }
-        
+            self.view.endEditing(true)
             commentTextField.text = ""
         }
     }
@@ -219,10 +237,18 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
                         tableView.insertRows(at: [
                             NSIndexPath(row: comments!.count-1, section: 0) as IndexPath], with: .automatic)
                         tableView.endUpdates()
+                        scrollToBottom()
                         print(message)
                     }
                 }
             }
+        }
+    }
+    
+    func scrollToBottom(){
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: self.comments!.count-1, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
     

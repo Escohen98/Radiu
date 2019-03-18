@@ -524,6 +524,7 @@
                         <viewLayoutGuide key="safeArea" id="v8C-A8-pt2"/>
                     </view>
                     <connections>
+                        <outlet property="bottomStack" destination="9Xa-lD-AYe" id="8gz-Qy-1gY"/>
                         <outlet property="commentTextField" destination="3A4-wM-B32" id="toU-Cj-cRw"/>
                         <outlet property="playPauseBtn" destination="Lle-Zq-TDk" id="L8y-QF-W9W"/>
                         <outlet property="postCommentBtn" destination="ybU-XP-5Iy" id="1sE-2O-3fV"/>
