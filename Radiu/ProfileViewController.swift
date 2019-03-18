@@ -40,15 +40,17 @@ class ProfileViewController: UIViewController {
     if let imageData = photoData {
       photo.image = UIImage(data: imageData)
     }
-    print(userData)
     username.text = userData.userName
     full_name.text = "\(userData.firstName) \(userData.lastName)"
-    if isActiveUser {
+    if activeStream.active == true {
       stream_link.isHidden = false
       live_icon.isHidden = false
     }
   }
   
+  @IBAction func goToLiveStream(_ sender: Any) {
+    performSegue(withIdentifier: "profileToStream", sender: nil)
+  }
   
   
   // MARK: - Navigation
