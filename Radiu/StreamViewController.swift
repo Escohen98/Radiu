@@ -122,23 +122,9 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
         socket.delegate = nil
     }
     
-    func getStreamCreator() -> String{
-        let endpoint = "https://audio-api.kjgoodwin.me/v1/channels/" + streamID
-        var ret : String = "Stream"
-        //post message
-        Repository.sessionManager.request(endpoint,
-                                            method: .get,
-                                            encoding: JSONEncoding.default).validate()
-        .responseJSON { response in
-            if response.result.isSuccess {
-                let res = JSON(response.result.value)
-                print("here")
-                print(response.result.value)
-                ret = res["creator"]["userName"].stringValue
-                print("Stream name" + ret)
-            }
-        }
-        return ret
+    @IBAction func backPressed(_ sender: Any) {
+        removeFromActive()
+        performSegue(withIdentifier: "backToFeed", sender: self)
     }
     
     @IBAction func postComment(_ sender: Any) {
