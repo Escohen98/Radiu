@@ -102,6 +102,17 @@
                                     <action selector="goToLiveStream:" destination="10G-dy-Yan" eventType="touchUpInside" id="JjW-hA-rhX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0WB-fu-wjd">
+                                <rect key="frame" x="97" y="536" width="181" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="181" id="Mop-iR-ifW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Subscribe"/>
+                                <connections>
+                                    <action selector="subscribeToChannel:" destination="10G-dy-Yan" eventType="touchUpInside" id="Xbt-No-Mrh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -113,8 +124,11 @@
                             <constraint firstItem="OfT-FS-MHR" firstAttribute="top" secondItem="xkh-3z-IAo" secondAttribute="top" constant="87" id="SJw-zI-cdC"/>
                             <constraint firstItem="xkh-3z-IAo" firstAttribute="bottom" secondItem="WNm-Ob-LId" secondAttribute="bottom" constant="177" id="T9i-QA-X23"/>
                             <constraint firstItem="A3z-X9-huw" firstAttribute="leading" secondItem="WNm-Ob-LId" secondAttribute="leading" id="Wm8-xm-Il5"/>
+                            <constraint firstItem="0WB-fu-wjd" firstAttribute="leading" secondItem="xkh-3z-IAo" secondAttribute="leading" constant="97" id="YLE-9T-mtc"/>
                             <constraint firstItem="7tg-9p-dhz" firstAttribute="leading" secondItem="xkh-3z-IAo" secondAttribute="leading" constant="134" id="ZFg-U1-hCD"/>
                             <constraint firstItem="A3z-X9-huw" firstAttribute="top" secondItem="xkh-3z-IAo" secondAttribute="top" id="a4b-U7-WAu"/>
+                            <constraint firstItem="0WB-fu-wjd" firstAttribute="centerX" secondItem="WNm-Ob-LId" secondAttribute="centerX" id="cTb-kD-BKM"/>
+                            <constraint firstItem="0WB-fu-wjd" firstAttribute="top" secondItem="WNm-Ob-LId" secondAttribute="bottom" constant="46" id="cr3-cR-6g6"/>
                             <constraint firstItem="xkh-3z-IAo" firstAttribute="trailing" secondItem="7tg-9p-dhz" secondAttribute="trailing" constant="229" id="fUG-l4-nyp"/>
                             <constraint firstItem="A3z-X9-huw" firstAttribute="leading" secondItem="cmN-BN-GEL" secondAttribute="leadingMargin" id="faT-hK-Z5I"/>
                             <constraint firstItem="qUm-iR-enU" firstAttribute="top" secondItem="Sl4-Dm-ZRg" secondAttribute="bottom" constant="6.5" id="mKX-YU-fkE"/>
@@ -132,13 +146,14 @@
                         <outlet property="live_icon" destination="7tg-9p-dhz" id="YuM-PS-ehy"/>
                         <outlet property="photo" destination="OfT-FS-MHR" id="PGx-FH-ws1"/>
                         <outlet property="stream_link" destination="qUm-iR-enU" id="pDH-FL-clb"/>
+                        <outlet property="subscribe" destination="0WB-fu-wjd" id="7Oj-e4-1pJ"/>
                         <outlet property="username" destination="Sl4-Dm-ZRg" id="4PW-RC-Ln4"/>
                         <segue destination="kyW-GT-tF5" kind="show" identifier="profileToStream" id="YB6-h3-rdZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GVf-uI-3Km" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1436" y="-581"/>
+            <point key="canvasLocation" x="1436" y="-581.55922038980509"/>
         </scene>
         <!--Search-->
         <scene sceneID="nwK-wN-ZZk">
@@ -427,19 +442,19 @@
                                         <rect key="frame" x="0.0" y="0.0" width="270" height="75"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Name of the Stream" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INC-pc-Tau">
-                                                <rect key="frame" x="0.0" y="0.0" width="153.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="189" height="26.5"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="username32" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="li4-yx-ZnE">
-                                                <rect key="frame" x="0.0" y="25.5" width="96.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="31.5" width="96.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55d-mE-nb8">
-                                                <rect key="frame" x="0.0" y="51" width="34" height="24"/>
+                                                <rect key="frame" x="0.0" y="57" width="34" height="18"/>
                                                 <state key="normal" title="Back"/>
                                                 <connections>
                                                     <segue destination="K53-Wu-5c7" kind="show" identifier="streamToBrowse" id="WE4-12-77c"/>

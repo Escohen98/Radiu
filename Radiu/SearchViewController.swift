@@ -181,7 +181,6 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
 
       if (sender as? searchCell)!.active {
         profileVC?.activeStream = getUserChannel(creatorID: Int((sender as? searchCell)!.id) ?? -1)
-        print(profileVC?.activeStream)
       }
     } else if segue.identifier == "profileUserSegue" {
       let profileVC = segue.destination as? ProfileViewController
@@ -201,7 +200,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     
   }
   
-  var selected: String = "live"//Selected tab
+  var selected: String = "live" //Selected tab
   
   //Handles tab bar selection changes
   func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

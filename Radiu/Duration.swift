@@ -54,12 +54,24 @@ class Duration: NSObject {
         
         var duration = "\(String(seconds))"
         if(seconds < 10) {
-            duration = "0\(duration)"
+          duration = "0\(duration)"
+          if current_duration < 60 {
+            duration = "0:\(duration)"
+          }
         }
         if(minutes > 0) {
-            duration = "\(String(minutes)):\(duration)"
+            if(minutes < 10) {
+              duration = "0\(String(minutes)):\(duration)"
+            } else {
+              duration = "\(String(minutes)):\(duration)"
+            }
             if(hours > 0) {
+              if hours < 10 {
+                duration = "0\(String(hours)):\(duration)"
+              } else {
                 duration = "\(String(hours)):\(duration)"
+              }
+              
             }
         }
       
