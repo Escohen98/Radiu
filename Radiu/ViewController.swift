@@ -19,7 +19,5 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         self.performSegue(withIdentifier: "goToMainUI", sender: self)
     }
-
-
 }
 
