@@ -418,25 +418,24 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bOb-v4-7Od">
                                         <rect key="frame" x="0.0" y="0.0" width="270" height="75"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Name of the Stream" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INC-pc-Tau">
-                                                <rect key="frame" x="0.0" y="0.0" width="153.5" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Name of the Stream" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INC-pc-Tau">
+                                                <rect key="frame" x="0.0" y="0.0" width="153.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="username32" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="li4-yx-ZnE">
-                                                <rect key="frame" x="0.0" y="25.5" width="96.5" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username32" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="li4-yx-ZnE">
+                                                <rect key="frame" x="0.0" y="29" width="96.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55d-mE-nb8">
-                                                <rect key="frame" x="0.0" y="51" width="34" height="24"/>
-                                                <state key="normal" title="Back"/>
-                                                <connections>
-                                                    <segue destination="K53-Wu-5c7" kind="show" identifier="streamToBrowse" id="WE4-12-77c"/>
-                                                </connections>
-                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="903-Nf-Lae">
+                                                <rect key="frame" x="0.0" y="54.5" width="42" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lle-Zq-TDk">
@@ -520,6 +519,9 @@
                         <outlet property="commentTextField" destination="3A4-wM-B32" id="toU-Cj-cRw"/>
                         <outlet property="playPauseBtn" destination="Lle-Zq-TDk" id="L8y-QF-W9W"/>
                         <outlet property="postCommentBtn" destination="ybU-XP-5Iy" id="1sE-2O-3fV"/>
+                        <outlet property="streamCreator" destination="li4-yx-ZnE" id="PAx-cf-Y6e"/>
+                        <outlet property="streamName" destination="INC-pc-Tau" id="hNJ-bY-Z8K"/>
+                        <outlet property="streamStatus" destination="903-Nf-Lae" id="c8k-R6-TMZ"/>
                         <outlet property="tableView" destination="qDP-Vt-hwG" id="QHf-JN-8PH"/>
                         <outlet property="webview" destination="9h3-Rj-ZAK" id="2kM-wl-qwl"/>
                     </connections>
@@ -541,7 +543,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="YB6-h3-rdZ"/>
         <segue reference="160-ok-8lz"/>
-        <segue reference="WE4-12-77c"/>
+        <segue reference="p2S-kz-Gl0"/>
         <segue reference="1P7-6P-hOy"/>
     </inferredMetricsTieBreakers>
 </document>
