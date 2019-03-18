@@ -135,7 +135,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             if(cell.active) {
                 cell.duration.isHidden = false
                 cell.duration.text = Duration().formatDuration(cell: cell, createdAt: ((data1 as! channel)).createdAt)
-                 cell.title.text = (data1 as! channel).desc
+                 cell.title.text = (data1 as! channel).creator["userName"].stringValue
                 cell.title.textColor = .darkGray
                 cell.activeListener.isHidden = false
                 setActiveListenersText(cell: cell, activeListeners: (data1 as! channel).activeListeners)
