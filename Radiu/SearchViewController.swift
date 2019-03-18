@@ -60,7 +60,8 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
             //Fill label data
             //let data2 = data1 as! channel
             cell.displayName.text = (data1 as! channel).displayName //Main Label
-            cell.title.text = "Awesome Stream!"//((data1 as! channel)).desc //Secondary Label
+            cell.title.text = (data1 as! channel).creator["userName"].stringValue//((data1 as! channel)).desc //Secondary Label
+            
             cell.title.textColor = .black
              cell.activeListener.isHidden = false
             setActiveListenersText(cell: cell, activeListeners: (data1 as! channel).activeListeners)
@@ -164,12 +165,15 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "streamSegue" {
             /* Add Data to be segued to StreamVC here*/
-            let streamVC = segue.destination as? StreamViewController
+            let streamVC = segue.destination as! StreamViewController
             /* Add Data to be segued to StreamVC here*/
             print("id")
             
             print("sender: \((sender as! searchCell).id)")
-            streamVC?.streamID = (sender as! searchCell).id
+            streamVC.streamID = (sender as! searchCell).id
+            streamVC.streamCreatorName = (sender as! searchCell).title.text!
+            print("heeeeeeere")
+            print((sender as! searchCell).title.text!)
         } else if segue.identifier == "profileSegue" {
             /* Add Data to be segued to ProfileVC here*/
             let profileVC = segue.destination as? ProfileViewController

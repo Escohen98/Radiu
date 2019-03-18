@@ -15,7 +15,8 @@ import Alamofire
 
 class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
     
-    var streamID : String = "fucknew"
+    var streamID : String = ""
+    var streamCreatorName : String = ""
     
     var isPlaying = false
     
@@ -38,6 +39,10 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
         }
     }
     
+    @IBOutlet weak var streamName: UILabel!
+    @IBOutlet weak var streamCreator: UILabel!
+    @IBOutlet weak var streamStatus: UILabel!
+    
     
     @IBOutlet weak var webview: WKWebView!
     
@@ -56,10 +61,13 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
     @IBOutlet weak var postCommentBtn: UIButton!
     @IBOutlet weak var commentTextField: UITextField!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         playPauseBtn.isSelected = true
+        
+        streamCreator.text = streamCreatorName
+        streamName.text = streamID
+        addToActiveListeners()
         
         profileImg = URL(string: "https://www.gravatar.com/avatar/8849642f880e4fa6dd04634efd44a87f")
         //profileImageView = UIImageView(image: profileImg!)
@@ -90,7 +98,6 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
         //let request = URLRequest(url: URL(string: ding)!)
         socket = WebSocket(url: URL(string: ding)!)
         print("socket")
-        print((socket))
         socket.delegate = self
         socket.enabledSSLCipherSuites = [TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256]
         socket.connect()
@@ -115,6 +122,25 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
         socket.delegate = nil
     }
     
+    func getStreamCreator() -> String{
+        let endpoint = "https://audio-api.kjgoodwin.me/v1/channels/" + streamID
+        var ret : String = "Stream"
+        //post message
+        Repository.sessionManager.request(endpoint,
+                                            method: .get,
+                                            encoding: JSONEncoding.default).validate()
+        .responseJSON { response in
+            if response.result.isSuccess {
+                let res = JSON(response.result.value)
+                print("here")
+                print(response.result.value)
+                ret = res["creator"]["userName"].stringValue
+                print("Stream name" + ret)
+            }
+        }
+        return ret
+    }
+    
     @IBAction func postComment(_ sender: Any) {
         
         if let commentText = commentTextField.text  {
@@ -136,6 +162,32 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
             }
         
             commentTextField.text = ""
+        }
+    }
+    
+    func addToActiveListeners(){
+        let endpoint = "https://audio-api.kjgoodwin.me/v1/channels/" + streamID + "/listeners"
+        Repository.sessionManager.request(endpoint,
+                                          method: .post,
+                                          encoding: JSONEncoding.default).validate()
+            .responseJSON { response in
+                guard response.result.isSuccess else {
+                    print(response.result)
+                    return
+                }
+        }
+    }
+    
+    func removeFromActive(){
+        let endpoint = "https://audio-api.kjgoodwin.me/v1/channels/" + streamID + "/listeners"
+        Repository.sessionManager.request(endpoint,
+                                          method: .delete,
+                                          encoding: JSONEncoding.default).validate()
+            .responseJSON { response in
+                guard response.result.isSuccess else {
+                    print(response.result)
+                    return
+                }
         }
     }
     
@@ -163,20 +215,26 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
         
         if let data = text.data(using: .utf8) {
             if let json = try? JSON(data: data) {
-                let messageChannelID = json["message"]["channelID"].stringValue
-                if messageChannelID == streamID {
-                    let messageCreator = json["message"]["creator"]["userName"].stringValue
-                    let message = json["message"]["body"].stringValue
-                    let imgString = json["message"]["creator"]["photoURL"].stringValue
-                    let imageURL = URL(string: imgString)
-                   
-                    //append comment to list and render new row
-                    comments!.append(Comment(text: message, image: imageURL!, username:messageCreator))
-                    tableView.beginUpdates()
-                    tableView.insertRows(at: [
-                        NSIndexPath(row: comments!.count-1, section: 0) as IndexPath], with: .automatic)
-                    tableView.endUpdates()
-                    print(message)
+                if json["type"] == "status-update"{
+                    let newStatus = json["status"]["text"].stringValue
+                    streamStatus.text = newStatus
+                    
+                } else {
+                    let messageChannelID = json["message"]["channelID"].stringValue
+                    if messageChannelID == streamID {
+                        let messageCreator = json["message"]["creator"]["userName"].stringValue
+                        let message = json["message"]["body"].stringValue
+                        let imgString = json["message"]["creator"]["photoURL"].stringValue
+                        let imageURL = URL(string: imgString)
+                       
+                        //append comment to list and render new row
+                        comments!.append(Comment(text: message, image: imageURL!, username:messageCreator))
+                        tableView.beginUpdates()
+                        tableView.insertRows(at: [
+                            NSIndexPath(row: comments!.count-1, section: 0) as IndexPath], with: .automatic)
+                        tableView.endUpdates()
+                        print(message)
+                    }
                 }
             }
         }
