@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C4391EB224053670084BC81 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4391EA224053670084BC81 /* SignUpViewController.swift */; };
 		4942B65F222F559400994674 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B65E222F559400994674 /* AppDelegate.swift */; };
 		4942B661222F559400994674 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942B660222F559400994674 /* ViewController.swift */; };
 		4942B664222F559400994674 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942B662222F559400994674 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		0E0D8C750A7F570D515FC9D6 /* Pods_Radiu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Radiu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C4391EA224053670084BC81 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4942B65B222F559400994674 /* Radiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4942B65E222F559400994674 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4942B660222F559400994674 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				4942B65E222F559400994674 /* AppDelegate.swift */,
 				4942B660222F559400994674 /* ViewController.swift */,
 				4942B662222F559400994674 /* Main.storyboard */,
+				3C4391EA224053670084BC81 /* SignUpViewController.swift */,
 				49B4E46A223B5EF000D76F46 /* Comment.swift */,
 				49B4E469223B5EF000D76F46 /* CommentTVCell.swift */,
 				4942B668222F559600994674 /* Assets.xcassets */,
@@ -388,6 +391,7 @@
 				494B7A2B22364017007771F8 /* users.swift in Sources */,
 				49B4E46C223B5EF000D76F46 /* Comment.swift in Sources */,
 				494B7A34223B3334007771F8 /* Duration.swift in Sources */,
+				3C4391EB224053670084BC81 /* SignUpViewController.swift in Sources */,
 				49B4E479223B668700D76F46 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,14 @@ class ViewController: UIViewController {
     //Auto-segue to next view.
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.performSegue(withIdentifier: "goToMainUI", sender: self)
     }
+    @IBAction func loginSegueBtn(_ sender: Any) {
+         self.performSegue(withIdentifier: "goToMainUI", sender: self)
+    }
+    @IBAction func signupSugueBtn(_ sender: Any) {
+         self.performSegue(withIdentifier: "goToSignUp", sender: self)
+    }
+    
+   
 }
 

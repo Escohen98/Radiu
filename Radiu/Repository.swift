@@ -74,6 +74,54 @@ class Repository{
                 completion(authToken)
         }
     }
+    
+    class func signUpUser(email: String?, password: String?, username: String?, fname:String?, lname:String?, completion: @escaping (String?) -> Void){
+        
+        var authToken : String?
+        
+        if(email == nil || password == nil){
+            print("Error, either email or password is empty")
+            completion(nil)
+            return
+        }
+        
+        let parameters: Parameters = [
+            "email": email!,
+            "password": password!,
+            "passwordConf": password!,
+            "userName": username!,
+            "firstName": fname!,
+            "lastName": lname!
+        ]
+        
+        print(parameters)
+        
+        guard let url = URL(string: "https://audio-api.kjgoodwin.me/v1/users") else {
+            completion(nil)
+            return
+        }
+        Alamofire.request(url,
+                          method: .post,
+                          parameters: parameters,
+                          encoding: JSONEncoding.default)
+            .validate()
+            .responseJSON { response in
+                guard response.result.isSuccess else {
+                    print("Error authenticating user")
+                    completion(nil)
+                    return
+                }
+                
+                if let auth = response.response?.allHeaderFields["Authorization"] as? String {
+                    authToken = auth.components(separatedBy: " ")[1]
+                } else {
+                    completion(nil)
+                    return
+                }
+                
+                completion(authToken)
+        }
+    }
 }
 
 class AccessTokenAdapter: RequestAdapter {

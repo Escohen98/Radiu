@@ -18,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RadiU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfj-Nz-o8m">
-                                <rect key="frame" x="89" y="126" width="236" height="109"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="100"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="waveform-vector-6" translatesAutoresizingMaskIntoConstraints="NO" id="MNk-xF-w6G">
                                 <rect key="frame" x="104" y="340" width="207" height="155"/>
                                 <constraints>
@@ -34,15 +28,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Sfj-Nz-o8m" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="OEe-76-Yin"/>
-                            <constraint firstItem="MNk-xF-w6G" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Sfj-Nz-o8m" secondAttribute="bottom" constant="39" id="PAH-W7-7YK"/>
                             <constraint firstItem="MNk-xF-w6G" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-30.5" id="Qxp-bT-y8z"/>
                             <constraint firstItem="MNk-xF-w6G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="104" id="WTJ-fz-3rj"/>
                             <constraint firstItem="MNk-xF-w6G" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XFP-2j-2ag"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MNk-xF-w6G" secondAttribute="bottom" constant="367" id="hgB-qU-VRH"/>
                             <constraint firstItem="MNk-xF-w6G" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-30.5" id="itj-Vo-vSe"/>
-                            <constraint firstItem="Sfj-Nz-o8m" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="82" id="s63-R9-VK1"/>
-                            <constraint firstItem="Sfj-Nz-o8m" firstAttribute="centerX" secondItem="MNk-xF-w6G" secondAttribute="centerX" id="u0c-ii-jL0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

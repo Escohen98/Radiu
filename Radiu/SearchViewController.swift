@@ -90,6 +90,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
                 cell.title.text = "Live" //Secondary Label
                 cell.title.textColor = UIColor(hue: 0.3917, saturation: 1, brightness: 0.69, alpha: 1.0)
                 cell.activeListener.isHidden = false
+                cell.active = true
                 setActiveListenersText(cell: cell, activeListeners: stream.activeListeners)
             } else {
                 cell.title.textColor = UIColor(hue: 0, saturation: 1, brightness: 0.93, alpha: 1.0)
@@ -251,7 +252,7 @@ class Search: UIViewController, UITableViewDelegate, UITableViewDataSource, UITa
         //Search taken from https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
         // Setup the Search Controller
         searchController.searchResultsUpdater = self as UISearchResultsUpdating
-    searchController.obscuresBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search..."
         searchController.searchBar.barTintColor = .black
         navigationItem.searchController = searchController

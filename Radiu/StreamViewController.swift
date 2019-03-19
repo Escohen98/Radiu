@@ -138,10 +138,14 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
     deinit {
         socket.disconnect(forceTimeout: 0)
         socket.delegate = nil
+        removeFromActive()
     }
     
     @IBAction func backPressed(_ sender: Any) {
         removeFromActive()
+        playPauseBtn.isSelected = false
+        let audioPause = "document.getElementById('audio-preview'); audioPreview.pause()"
+        webview.evaluateJavaScript(audioPause);
         performSegue(withIdentifier: "backToFeed", sender: self)
     }
     
