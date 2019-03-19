@@ -101,7 +101,9 @@ class ProfileViewController: UIViewController {
             break
         case "profileToStream":
             let stream = segue.destination as? StreamViewController
-            stream!.streamID = String(userData.id)
+            print(userData.id)
+            stream!.streamID = String(activeStream.id)
+            stream!.streamCreatorName = String(userData.userName)
             break
         default:
             NSLog("No such segue identifier", segue.identifier ?? "<none>")

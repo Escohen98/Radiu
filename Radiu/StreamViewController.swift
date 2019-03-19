@@ -202,7 +202,9 @@ class StreamViewController: UIViewController,WKUIDelegate,WebSocketDelegate {
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let ac = UIAlertController(title: "Hey, listen!", message: message, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        ac.addAction(UIAlertAction(title: "Back to feed", style: .default, handler: { _ in
+            self.performSegue(withIdentifier: "backToFeed", sender: self)
+        }))
         present(ac, animated: true)
         completionHandler()
         print("alert was fired in the")
